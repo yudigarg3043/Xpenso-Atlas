@@ -238,8 +238,13 @@
 
 /* Chart Card */
 .chart-card {
-    height: 350px;
+    height: 350px; /* Ensure this is set for the chart's container */
+    width: 100%; /* Ensure the chart takes up the full width of its parent container */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
 
 /* Recent Transactions */
 .transaction-list {

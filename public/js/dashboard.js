@@ -4,44 +4,37 @@ document.addEventListener('DOMContentLoaded', function() {
     const user = JSON.parse(localStorage.getItem('user'));
     
     if (!token || !user) {
-        // Redirect to login page if not logged in
         window.location.href = '/index.html';
         return;
     }
     
-    // Set user name
     document.getElementById('userName').textContent = user.fullName;
     
-    // Sidebar toggle logic
     const menuToggle = document.getElementById('menuToggle');
     const sidebar = document.querySelector('.sidebar');
-    const mainContent = document.querySelector('.main-content');
-
+    
     menuToggle.addEventListener('click', function() {
         sidebar.classList.toggle('active');
-        mainContent.classList.toggle('shifted');
     });
 
-    // Optional: Close sidebar on outside click (only on small screens)
-    document.addEventListener('click', function(e) {
+    // 👉 Close sidebar on outside click (only for small screens)
+    document.addEventListener('click', function(event) {
         if (
-            window.innerWidth <= 991.98 &&
-            !sidebar.contains(e.target) &&
-            !menuToggle.contains(e.target)
+            window.innerWidth <= 991.98 &&               // Only on mobile
+            sidebar.classList.contains('active') &&      // Sidebar is open
+            !sidebar.contains(event.target) &&           // Click is outside sidebar
+            !menuToggle.contains(event.target)           // Click is not the toggle button
         ) {
             sidebar.classList.remove('active');
-            mainContent.classList.remove('shifted');
         }
     });
 
-    // Handle logout
     document.getElementById('logoutBtn').addEventListener('click', function() {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
         window.location.href = '/index.html';
     });
-
-    // Initialize expense chart
+    
     const ctx = document.getElementById('expenseChart').getContext('2d');
     const expenseChart = new Chart(ctx, {
         type: 'doughnut',
@@ -62,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         options: {
             responsive: true,
-            maintainAspectRatio: false,
+            maintainAspectRatio: true,
             plugins: {
                 legend: {
                     position: 'bottom',
@@ -75,16 +68,13 @@ document.addEventListener('DOMContentLoaded', function() {
             cutout: '70%'
         }
     });
-
-    // Fetch and display user's transactions
+    
     fetchTransactions();
 });
 
-// Function to fetch user transactions (placeholder/mock)
 function fetchTransactions() {
     const token = localStorage.getItem('token');
-
-        // This would normally be a fetch request to your API
+    // This would normally be a fetch request to your API
     // For demo purposes, we're using mock data
     
     // Example of how the fetch would look:
