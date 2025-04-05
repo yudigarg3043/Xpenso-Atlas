@@ -6,150 +6,177 @@
     <title>Dashboard - Xpenso</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="dashboard-container">
         <!-- Sidebar -->
         <div class="sidebar">
-            <div class="sidebar-header">
-                <h1 class="sidebar-logo">Xpenso</h1>
+            <div class="logo-container">
+                <h1 class="logo">Xpenso</h1>
             </div>
-            <div class="sidebar-menu">
-                <div class="menu-item active">
-                    <i class="fas fa-home"></i>
-                    <span>Dashboard</span>
-                </div>
-                <div class="menu-item" onclick="window.location.href='income.html'">
-                    <i class="fas fa-arrow-down"></i>
-                    <span>Income</span>
-                </div>
-                <div class="menu-item" onclick="window.location.href='expense.html'">
-                    <i class="fas fa-arrow-up"></i>
-                    <span>Expenses</span>
-                </div>
-                <div class="menu-item">
-                    <i class="fas fa-chart-pie"></i>
-                    <span>Reports</span>
-                </div>
-                <div class="menu-item">
-                    <i class="fas fa-cog"></i>
-                    <span>Settings</span>
-                </div>
-                <div class="menu-item" id="logoutBtn">
-                    <i class="fas fa-sign-out-alt"></i>
-                    <span>Logout</span>
-                </div>
+            <ul class="nav-menu">
+                <li class="nav-item active">
+                    <a href="#"><i class="fas fa-home"></i> Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#"><i class="fas fa-chart-line"></i> Analytics</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#"><i class="fas fa-wallet"></i> Expenses</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#"><i class="fas fa-money-bill-wave"></i> Income</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#"><i class="fas fa-cog"></i> Settings</a>
+                </li>
+            </ul>
+            <div class="logout-container">
+                <button id="logoutBtn" class="btn btn-outline-danger">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
             </div>
         </div>
-
+        
         <!-- Main Content -->
         <div class="main-content">
-            <div class="topbar">
-                <div>
-                    <h2>Dashboard</h2>
-                    <p class="text-muted">Welcome back, <span id="userName">User</span>!</p>
-                </div>
-                <div class="d-flex align-items-center">
-                    <div class="hamburger-menu me-3" id="hamburgerMenu">
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <button class="menu-toggle" id="menuToggle">
                         <i class="fas fa-bars"></i>
-                    </div>
-                    <div class="user-info">
-                        <div class="user-avatar" id="userAvatar">U</div>
-                        <div class="dropdown">
-                            <button class="btn dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                <span id="userNameDropdown">User</span>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="userDropdown">
-                                <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i> Profile</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i> Settings</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#" id="logoutBtnDropdown"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
-                            </ul>
+                    </button>
+                    <h2>Dashboard</h2>
+                </div>
+                <div class="header-right">
+                    <div class="user-profile">
+                        <span id="userName">User Name</span>
+                        <div class="avatar">
+                            <img src="/placeholder.svg?height=40&width=40" alt="User Avatar">
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="row">
-                <!-- Balance Card -->
-                <div class="col-lg-6 mb-4">
-                    <div class="dashboard-card balance-card">
-                        <div class="card-header">
-                            <h5 class="card-title">Balance Overview</h5>
-                            <div class="card-action">
-                                <span>This Month</span>
-                                <i class="fas fa-chevron-down"></i>
+            </header>
+            
+            <div class="dashboard-content">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card summary-card">
+                            <div class="card-body">
+                                <h3>Monthly Summary</h3>
+                                <div class="summary-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-label">Income</span>
+                                        <span class="stat-value income">$4,250.00</span>
+                                        <span class="stat-change positive">+12.5%</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Expenses</span>
+                                        <span class="stat-value expenses">$2,840.75</span>
+                                        <span class="stat-change negative">+8.2%</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Savings</span>
+                                        <span class="stat-value savings">$1,409.25</span>
+                                        <span class="stat-change positive">+21.3%</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="balance-chart-container">
-                            <canvas id="balanceChart"></canvas>
-                            <div class="balance-total" id="totalBalance">$0.00</div>
-                        </div>
-                        <div class="balance-stats">
-                            <div class="stat-item">
-                                <div class="stat-value income-value" id="totalIncome">$0.00</div>
-                                <div class="stat-label">Total Income</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-value expense-value" id="totalExpense">$0.00</div>
-                                <div class="stat-label">Total Expenses</div>
+                        
+                        <div class="card chart-card">
+                            <div class="card-body">
+                                <h3>Expense Breakdown</h3>
+                                <canvas id="expenseChart"></canvas>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Recent Transactions -->
-                <div class="col-lg-6 mb-4">
-                    <div class="dashboard-card">
-                        <div class="card-header">
-                            <h5 class="card-title">Recent Transactions</h5>
-                            <div class="card-action">
-                                <span>View All</span>
-                                <i class="fas fa-chevron-right"></i>
+                    
+                    <div class="col-md-4">
+                        <div class="card recent-transactions">
+                            <div class="card-body">
+                                <h3>Recent Transactions</h3>
+                                <ul class="transaction-list">
+                                    <li class="transaction-item">
+                                        <div class="transaction-icon expense">
+                                            <i class="fas fa-shopping-cart"></i>
+                                        </div>
+                                        <div class="transaction-details">
+                                            <span class="transaction-title">Grocery Shopping</span>
+                                            <span class="transaction-date">Today, 2:30 PM</span>
+                                        </div>
+                                        <span class="transaction-amount expense">-$85.20</span>
+                                    </li>
+                                    <li class="transaction-item">
+                                        <div class="transaction-icon income">
+                                            <i class="fas fa-money-check"></i>
+                                        </div>
+                                        <div class="transaction-details">
+                                            <span class="transaction-title">Salary Deposit</span>
+                                            <span class="transaction-date">Yesterday</span>
+                                        </div>
+                                        <span class="transaction-amount income">+$2,750.00</span>
+                                    </li>
+                                    <li class="transaction-item">
+                                        <div class="transaction-icon expense">
+                                            <i class="fas fa-utensils"></i>
+                                        </div>
+                                        <div class="transaction-details">
+                                            <span class="transaction-title">Restaurant</span>
+                                            <span class="transaction-date">Mar 20, 2025</span>
+                                        </div>
+                                        <span class="transaction-amount expense">-$42.50</span>
+                                    </li>
+                                    <li class="transaction-item">
+                                        <div class="transaction-icon expense">
+                                            <i class="fas fa-gas-pump"></i>
+                                        </div>
+                                        <div class="transaction-details">
+                                            <span class="transaction-title">Fuel</span>
+                                            <span class="transaction-date">Mar 18, 2025</span>
+                                        </div>
+                                        <span class="transaction-amount expense">-$65.75</span>
+                                    </li>
+                                </ul>
+                                <a href="#" class="btn btn-outline-primary btn-sm view-all">View All Transactions</a>
                             </div>
                         </div>
-                        <div class="transaction-list" id="recentTransactions">
-                            <!-- Transactions will be loaded here -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <!-- Expenses Chart -->
-                <div class="col-lg-8 mb-4">
-                    <div class="dashboard-card">
-                        <div class="card-header">
-                            <h5 class="card-title">Expense Trends</h5>
-                            <div class="card-action">
-                                <span>Last 30 Days</span>
-                                <i class="fas fa-chevron-down"></i>
+                        
+                        <div class="card budget-card">
+                            <div class="card-body">
+                                <h3>Budget Status</h3>
+                                <div class="budget-item">
+                                    <div class="budget-info">
+                                        <span class="budget-category">Food & Groceries</span>
+                                        <span class="budget-progress">$420/$500</span>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 84%"></div>
+                                    </div>
+                                </div>
+                                <div class="budget-item">
+                                    <div class="budget-info">
+                                        <span class="budget-category">Transportation</span>
+                                        <span class="budget-progress">$280/$300</span>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 93%"></div>
+                                    </div>
+                                </div>
+                                <div class="budget-item">
+                                    <div class="budget-info">
+                                        <span class="budget-category">Entertainment</span>
+                                        <span class="budget-progress">$150/$200</span>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-info" role="progressbar" style="width: 75%"></div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="chart-container">
-                            <canvas id="expensesChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recent Expenses -->
-                <div class="col-lg-4 mb-4">
-                    <div class="dashboard-card">
-                        <div class="card-header">
-                            <h5 class="card-title">Recent Expenses</h5>
-                            <div class="card-action" onclick="window.location.href='expense.html'">
-                                <span>View All</span>
-                                <i class="fas fa-chevron-right"></i>
-                            </div>
-                        </div>
-                        <div class="transaction-list" id="expensesList">
-                            <!-- Expenses will be loaded here -->
                         </div>
                     </div>
                 </div>
@@ -159,9 +186,9 @@
 
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Auth JS -->
-    <script src="js/auth.js"></script>
-    <!-- Dashboard JS -->
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom JS -->
     <script src="js/dashboard.js"></script>
 </body>
 </html>
