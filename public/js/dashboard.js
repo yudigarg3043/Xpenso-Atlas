@@ -12,24 +12,35 @@ document.addEventListener('DOMContentLoaded', function() {
     // Set user name
     document.getElementById('userName').textContent = user.fullName;
     
-    // Toggle sidebar on mobile
+    // Sidebar toggle logic
     const menuToggle = document.getElementById('menuToggle');
     const sidebar = document.querySelector('.sidebar');
-    
+    const mainContent = document.querySelector('.main-content');
+
     menuToggle.addEventListener('click', function() {
         sidebar.classList.toggle('active');
+        mainContent.classList.toggle('shifted');
     });
-    
+
+    // Optional: Close sidebar on outside click (only on small screens)
+    document.addEventListener('click', function(e) {
+        if (
+            window.innerWidth <= 991.98 &&
+            !sidebar.contains(e.target) &&
+            !menuToggle.contains(e.target)
+        ) {
+            sidebar.classList.remove('active');
+            mainContent.classList.remove('shifted');
+        }
+    });
+
     // Handle logout
     document.getElementById('logoutBtn').addEventListener('click', function() {
-        // Clear local storage
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        
-        // Redirect to login page
         window.location.href = '/index.html';
     });
-    
+
     // Initialize expense chart
     const ctx = document.getElementById('expenseChart').getContext('2d');
     const expenseChart = new Chart(ctx, {
@@ -64,16 +75,16 @@ document.addEventListener('DOMContentLoaded', function() {
             cutout: '70%'
         }
     });
-    
+
     // Fetch and display user's transactions
     fetchTransactions();
 });
 
-// Function to fetch user transactions
+// Function to fetch user transactions (placeholder/mock)
 function fetchTransactions() {
     const token = localStorage.getItem('token');
-    
-    // This would normally be a fetch request to your API
+
+        // This would normally be a fetch request to your API
     // For demo purposes, we're using mock data
     
     // Example of how the fetch would look:

@@ -3,7 +3,7 @@
     --secondary-color: #b388ff;
     --accent-color: #18ffff;
     --success-color: #00e676;
-    --text-color: #e0e0e0;
+    --text-color: white;
     --light-bg: #0f0f1a;
     --white: #1a1a2e;
     --shadow: 0 4px 12px rgba(124, 77, 255, 0.2);
@@ -64,9 +64,9 @@ body.light-theme .form-control {
     background-color: #fff;
     color: #212529;
     border: 1px solid #ccc;
-    padding: 0.75rem;
+    /* padding: 0.75rem; */
     transition: box-shadow 0.3s;
-    border-radius: 0.25rem; /* Slight rounding */
+    border-radius: 8px; /* Slight rounding */
 }
 
 body.light-theme .form-control:focus {
@@ -80,8 +80,8 @@ body.light-theme .btn-primary {
     border-color: #9c4dcc;
     color: white;
     border-radius: 0.25rem; /* Slightly rounded */
-    padding: 0.75rem;
-    font-weight: bold;
+    /* padding: 0.75rem; */
+    /* font-weight: bold; */
 }
 
 body.light-theme .btn-primary:hover {
@@ -147,6 +147,8 @@ body.light-theme #showLogin:hover {
 body.light-theme .form-wrapper {
     max-width: 400px;
     margin: 0 auto;
+    padding: 2rem;
+    background: #7c4dff5e;
 }
 
 /* === Adjustments for the form links text === */
@@ -170,11 +172,57 @@ body.light-theme .forgot-password:hover {
 
 /* Dashboard Preview Section */
 .dashboard-preview {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    min-height: 100vh;
     position: relative;
     overflow: hidden;
+    background: linear-gradient(135deg, #7c4dff, #b388ff, #18ffff);
+    background-size: 400% 400%;
+    animation: gradientShift 20s ease infinite;
+    min-height: 100vh;
+    z-index: 0;
 }
+
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.4;
+    animation: moveBlobs 25s ease-in-out infinite alternate;
+}
+
+.blob1 {
+    width: 300px;
+    height: 300px;
+    background: #b388ff;
+    top: 10%;
+    left: 20%;
+}
+
+.blob2 {
+    width: 400px;
+    height: 400px;
+    background: #18ffff;
+    top: 60%;
+    left: 50%;
+}
+
+.blob3 {
+    width: 350px;
+    height: 350px;
+    background: #7c4dff;
+    top: 30%;
+    left: 70%;
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+@keyframes moveBlobs {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(-50px, 50px) scale(1.2); }
+}
+
 
 /* Form Container */
 .form-container {
@@ -191,6 +239,7 @@ body.light-theme .forgot-password:hover {
     backdrop-filter: blur(10px);
     padding: 2rem;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    max-width: 400px;
 }
 
 /* Form Elements */
