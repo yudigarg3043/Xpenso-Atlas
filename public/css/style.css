@@ -30,6 +30,136 @@ body::before {
     z-index: 0;
 }
 
+/* Theme Toggle Button Styles */
+.theme-toggle-btn {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1050;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    padding: 0.6rem 0.75rem;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* === Light Theme Base === */
+body.light-theme {
+    background-color: #f2f3fa;
+    color: #212529;
+}
+
+/* === Form Container === */
+body.light-theme .form-container {
+    background-color: #f6f0ff; /* Light purple background */
+    color: #333;
+    padding: 2rem;
+    box-shadow: 0 8px 20px rgba(126, 87, 194, 0.15);
+    transition: background-color 0.3s ease;
+    /* border-radius: 8px; */
+}
+
+/* === Inputs === */
+body.light-theme .form-control {
+    background-color: #fff;
+    color: #212529;
+    border: 1px solid #ccc;
+    padding: 0.75rem;
+    transition: box-shadow 0.3s;
+    border-radius: 0.25rem; /* Slight rounding */
+}
+
+body.light-theme .form-control:focus {
+    border-color: #9c4dcc; /* Stronger purple on focus */
+    box-shadow: 0 0 0 0.2rem rgba(156, 77, 204, 0.25);
+}
+
+/* === Button Primary === */
+body.light-theme .btn-primary {
+    background-color: #9c4dcc; /* Strong purple */
+    border-color: #9c4dcc;
+    color: white;
+    border-radius: 0.25rem; /* Slightly rounded */
+    padding: 0.75rem;
+    font-weight: bold;
+}
+
+body.light-theme .btn-primary:hover {
+    background-color: #7e57c2; /* Darker purple on hover */
+    border-color: #7e57c2;
+}
+
+body.light-theme .btn-primary:focus {
+    box-shadow: 0 0 0 0.2rem rgba(156, 77, 204, 0.5);
+}
+
+/* === Social Buttons === */
+body.light-theme .social-btn {
+    border-radius: 0.25rem; /* Square button borders */
+    transition: background-color 0.3s ease;
+    padding: 0.75rem;
+    font-weight: bold;
+}
+
+body.light-theme .social-btn:hover {
+    background-color: #e0d7f0;
+    color: #7e57c2;
+}
+
+/* === Password Toggle Icon === */
+body.light-theme .password-toggle i {
+    color: #9c4dcc;
+}
+
+/* === Divider and Links === */
+body.light-theme .divider,
+body.light-theme a {
+    color: #9c4dcc;
+}
+
+body.light-theme a:hover {
+    text-decoration: underline;
+    color: #7e57c2; /* Darker purple when hovered */
+}
+
+/* === Logo === */
+body.light-theme .logo {
+    color: #9c4dcc; /* Brighter purple for logo */
+    font-weight: bold;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* === Sign Up / Login Links === */
+body.light-theme #showSignup,
+body.light-theme #showLogin {
+    color: #9c4dcc;
+    font-weight: bold;
+}
+
+body.light-theme #showSignup:hover,
+body.light-theme #showLogin:hover {
+    color: #7e57c2;
+    text-decoration: underline;
+}
+
+/* === Additional tweaks for spacing and layout === */
+body.light-theme .form-wrapper {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* === Adjustments for the form links text === */
+body.light-theme .forgot-password {
+    color: #9c4dcc;
+}
+
+body.light-theme .forgot-password:hover {
+    color: #7e57c2;
+    text-decoration: underline;
+}
+
+
 /* Logo Styling */
 .logo {
     font-weight: 700;

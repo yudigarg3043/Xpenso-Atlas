@@ -216,3 +216,29 @@ function registerUser(fullName, email, password) {
         submitBtn.textContent = originalText;
     });
 }
+
+//for theme toggle
+document.addEventListener('DOMContentLoaded', function () {
+    const themeToggle = document.getElementById('themeToggle');
+    const icon = themeToggle.querySelector('i');
+    const currentTheme = localStorage.getItem('theme');
+
+    // Set theme on load
+    if (currentTheme === 'light') {
+        document.body.classList.add('light-theme');
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+    }
+
+    themeToggle.addEventListener('click', function () {
+        document.body.classList.toggle('light-theme');
+        const isLight = document.body.classList.contains('light-theme');
+
+        // Toggle icon
+        icon.classList.toggle('fa-moon', !isLight);
+        icon.classList.toggle('fa-sun', isLight);
+
+        // Save preference
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    });
+});
