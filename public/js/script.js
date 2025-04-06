@@ -162,7 +162,7 @@ function loginUser(email, password) {
         localStorage.setItem('token', data.token);
         
         // Redirect to dashboard
-        window.location.href = '/dashboard.html';
+        window.location.href = '/dashboard';
     })
     .catch(error => {
         // Show error message

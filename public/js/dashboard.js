@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const user = JSON.parse(localStorage.getItem('user'));
     
     if (!token || !user) {
-        window.location.href = '/index.html';
+        window.location.href = '/';
         return;
     }
     
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('logoutBtn').addEventListener('click', function() {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        window.location.href = '/index.html';
+        window.location.href = '/';
     });
     
     const ctx = document.getElementById('expenseChart').getContext('2d');
