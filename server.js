@@ -6,6 +6,9 @@ const cors = require('cors');
 const path = require('path');
 require('dotenv').config();
 
+// Import User model from models/User.js
+const User = require('./models/User');
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -14,7 +17,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-//Set the path for static HTML files
+// Set the path for static HTML files
 app.set('views', path.join(__dirname, 'views'));
 
 // MongoDB Connection
@@ -25,66 +28,26 @@ mongoose.connect(process.env.MONGODB_URI, {
 .then(() => console.log('MongoDB connected'))
 .catch(err => console.error('MongoDB connection error:', err));
 
-// User Schema
-const userSchema = new mongoose.Schema({
-    fullName: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-        trim: true,
-        lowercase: true
-    },
-    password: {
-        type: String,
-        required: true
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now
-    }
-});
-
-// Hash password before saving
-userSchema.pre('save', async function(next) {
-    if (!this.isModified('password')) return next();
-    
-    try {
-        const salt = await bcrypt.genSalt(10);
-        this.password = await bcrypt.hash(this.password, salt);
-        next();
-    } catch (error) {
-        next(error);
-    }
-});
-
-const User = mongoose.model('User', userSchema);
-
-// API Routes
 // Register User
 app.post('/api/register', async (req, res) => {
     try {
         const { fullName, email, password } = req.body;
-        
+
         // Check if user already exists
         const existingUser = await User.findOne({ email });
         if (existingUser) {
             return res.status(400).json({ message: 'User already exists' });
         }
-        
+
         // Create new user
         const newUser = new User({
             fullName,
             email,
             password
         });
-        
+
         await newUser.save();
-        
+
         res.status(201).json({ message: 'User registered successfully' });
     } catch (error) {
         console.error('Registration error:', error);
@@ -96,26 +59,26 @@ app.post('/api/register', async (req, res) => {
 app.post('/api/login', async (req, res) => {
     try {
         const { email, password } = req.body;
-        
+
         // Find user by email
         const user = await User.findOne({ email });
         if (!user) {
             return res.status(400).json({ message: 'Invalid credentials' });
         }
-        
+
         // Compare passwords
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
             return res.status(400).json({ message: 'Invalid credentials' });
         }
-        
+
         // Create JWT token
         const token = jwt.sign(
             { id: user._id },
             process.env.JWT_SECRET,
             { expiresIn: '1d' }
         );
-        
+
         // Return user data and token
         res.json({
             token,
@@ -131,17 +94,15 @@ app.post('/api/login', async (req, res) => {
     }
 });
 
-// Serve the main HTML file for any other route
+// Serve static HTML pages
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'index.html'));
 });
 
-//dashboard route
 app.get('/dashboard', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'dashboard.html'));
 });
 
-//contact route
 app.get('/contact', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'contact.html'));
 });
