@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const path = require('path');
 require('dotenv').config();
+const exphbs = require('express-handlebars');
 
 // Import User model from models/User.js
 const User = require('./models/User');
@@ -17,7 +18,9 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Set the path for static HTML files
+// View engine setup
+app.engine('hbs', exphbs.engine({ extname: 'hbs' }));
+app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
 
 // MongoDB Connection
@@ -94,18 +97,31 @@ app.post('/api/login', async (req, res) => {
     }
 });
 
-// Serve static HTML pages
+// // Serve static HTML pages
+// app.get('/', (req, res) => {
+//     res.sendFile(path.join(__dirname, 'views', 'index.html'));
+// });
+
+// app.get('/dashboard', (req, res) => {
+//     res.sendFile(path.join(__dirname, 'views', 'dashboard.html'));
+// });
+
+// app.get('/contact', (req, res) => {
+//     res.sendFile(path.join(__dirname, 'views', 'contact.html'));
+// });
+
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'index.html'));
-});
-
-app.get('/dashboard', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'dashboard.html'));
-});
-
-app.get('/contact', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'contact.html'));
-});
+    res.render('index');  // uses views/index.hbs
+  });
+  
+  app.get('/dashboard', (req, res) => {
+    res.render('dashboard');  // uses views/dashboard.hbs
+  });
+  
+  app.get('/contact', (req, res) => {
+    res.render('contact');  // uses views/contact.hbs
+  });
+  
 
 // Start server
 app.listen(PORT, () => {

@@ -1,0 +1,174 @@
+{{!-- views/dashboard.hbs --}}
+
+{{!-- Page-specific CSS --}}
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/dashboard.css">
+
+<div class="dashboard-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo-container text-center py-3">
+            <h2 class="logo">Expense Tracker</h2>
+        </div>
+        <div class="text-center my-3">
+            <img src="https://cdn-icons-png.flaticon.com/512/4140/4140037.png" alt="Avatar" class="avatar-img mb-2">
+            <h5 class="user-name" id="userName">User Name</h5>
+        </div>
+        <ul class="nav-menu px-3">
+            <li class="nav-item">
+                <a href="#"><i class="fas fa-th-large"></i> Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a href="#"><i class="fas fa-wallet"></i> Income</a>
+            </li>
+            <li class="nav-item active">
+                <a href="#"><i class="fas fa-money-check-alt"></i> Expense</a>
+            </li>
+        </ul>
+        <div class="logout-container mt-auto px-3">
+            <button id="logoutBtn" class="btn btn-link logout-btn text-start">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <header class="dashboard-header">
+            <div class="header-left">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h2>Dashboard</h2>
+            </div>
+            <div class="header-right">
+                {{!-- Optional user profile section --}}
+            </div>
+        </header>
+
+        <div class="dashboard-content">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card summary-card">
+                        <div class="card-body">
+                            <h3>Monthly Summary</h3>
+                            <div class="summary-stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">Income</span>
+                                    <span class="stat-value income">$4,250.00</span>
+                                    <span class="stat-change positive">+12.5%</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Expenses</span>
+                                    <span class="stat-value expenses">$2,840.75</span>
+                                    <span class="stat-change negative">+8.2%</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Savings</span>
+                                    <span class="stat-value savings">$1,409.25</span>
+                                    <span class="stat-change positive">+21.3%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card chart-card">
+                        <div class="card-body">
+                            <h3>Expense Breakdown</h3>
+                            <canvas id="expenseChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card recent-transactions">
+                        <div class="card-body">
+                            <h3>Recent Transactions</h3>
+                            <ul class="transaction-list">
+                                <li class="transaction-item">
+                                    <div class="transaction-icon expense">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </div>
+                                    <div class="transaction-details">
+                                        <span class="transaction-title">Grocery Shopping</span>
+                                        <span class="transaction-date">Today, 2:30 PM</span>
+                                    </div>
+                                    <span class="transaction-amount expense">-$85.20</span>
+                                </li>
+                                <li class="transaction-item">
+                                    <div class="transaction-icon income">
+                                        <i class="fas fa-money-check"></i>
+                                    </div>
+                                    <div class="transaction-details">
+                                        <span class="transaction-title">Salary Deposit</span>
+                                        <span class="transaction-date">Yesterday</span>
+                                    </div>
+                                    <span class="transaction-amount income">+$2,750.00</span>
+                                </li>
+                                <li class="transaction-item">
+                                    <div class="transaction-icon expense">
+                                        <i class="fas fa-utensils"></i>
+                                    </div>
+                                    <div class="transaction-details">
+                                        <span class="transaction-title">Restaurant</span>
+                                        <span class="transaction-date">Mar 20, 2025</span>
+                                    </div>
+                                    <span class="transaction-amount expense">-$42.50</span>
+                                </li>
+                                <li class="transaction-item">
+                                    <div class="transaction-icon expense">
+                                        <i class="fas fa-gas-pump"></i>
+                                    </div>
+                                    <div class="transaction-details">
+                                        <span class="transaction-title">Fuel</span>
+                                        <span class="transaction-date">Mar 18, 2025</span>
+                                    </div>
+                                    <span class="transaction-amount expense">-$65.75</span>
+                                </li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-primary btn-sm view-all">View All Transactions</a>
+                        </div>
+                    </div>
+
+                    <div class="card budget-card">
+                        <div class="card-body">
+                            <h3>Budget Status</h3>
+                            <div class="budget-item">
+                                <div class="budget-info">
+                                    <span class="budget-category">Food & Groceries</span>
+                                    <span class="budget-progress">$420/$500</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 84%"></div>
+                                </div>
+                            </div>
+                            <div class="budget-item">
+                                <div class="budget-info">
+                                    <span class="budget-category">Transportation</span>
+                                    <span class="budget-progress">$280/$300</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 93%"></div>
+                                </div>
+                            </div>
+                            <div class="budget-item">
+                                <div class="budget-info">
+                                    <span class="budget-category">Entertainment</span>
+                                    <span class="budget-progress">$150/$200</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-info" role="progressbar" style="width: 75%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{{!-- Page-specific JS --}}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="/js/dashboard.js"></script>

@@ -1,0 +1,125 @@
+{{! views/index.hbs }}
+{{! Page-specific CSS }}
+<link rel="stylesheet" href="/css/style.css">
+
+<div class="container-fluid p-0">
+    <div class="row g-0">
+        <div class="col-lg-5 col-md-12 form-container">
+            <div class="form-wrapper">
+                <div class="logo-container text-center mb-4">
+                    <h1 class="logo">Xpenso</h1>
+                </div>
+
+                {{!-- Login Form --}}
+                <div id="loginForm">
+                    <h2 class="text-center mb-4">Sign in to Xpenso</h2>
+                    <form id="login-form">
+                        <div class="mb-3">
+                            <input type="email" class="form-control" id="email" placeholder="Email" required>
+                            <div class="invalid-feedback">Please enter a valid email address.</div>
+                        </div>
+
+                        <div class="mb-3 password-field">
+                            <input type="password" class="form-control" id="password" placeholder="Password" required>
+                            <span class="password-toggle" onclick="togglePassword('password')">
+                                <i class="far fa-eye"></i>
+                            </span>
+                            <div class="invalid-feedback">Password is required.</div>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="rememberMe">
+                                <label class="form-check-label" for="rememberMe">Remember me</label>
+                            </div>
+                            <a href="#" class="forgot-password">Forgot Password?</a>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 mb-1">Sign in</button>
+
+                        <div class="text-center mb-3">
+                            <span class="divider">Or login with</span>
+                        </div>
+
+                        <div class="social-login">
+                            <button type="button" class="btn btn-outline-secondary social-btn">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google">
+                                Google
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary social-btn">
+                                <i class="fab fa-apple"></i>
+                                Apple
+                            </button>
+                        </div>
+
+                        <div class="text-center mt-4">
+                            <p>Don't have an account? <a href="#" id="showSignup">Sign Up now</a></p>
+                        </div>
+                    </form>
+                </div>
+
+                {{!-- Signup Form --}}
+                <div id="signupForm" style="display: none;">
+                    <h3 class="text-center mb-4">Create an Xpenso Account</h3>
+                    <form id="signup-form">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="fullName" placeholder="Full Name" required>
+                            <div class="invalid-feedback">Please enter your full name.</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <input type="email" class="form-control" id="signupEmail" placeholder="Email" required>
+                            <div class="invalid-feedback">Please enter a valid email address.</div>
+                        </div>
+
+                        <div class="mb-3 password-field">
+                            <input type="password" class="form-control" id="signupPassword" placeholder="Password" required>
+                            <span class="password-toggle" onclick="togglePassword('signupPassword')">
+                                <i class="far fa-eye"></i>
+                            </span>
+                            <div class="invalid-feedback">Password must be at least 8 characters with letters and numbers.</div>
+                        </div>
+
+                        <div class="mb-3 password-field">
+                            <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password" required>
+                            <span class="password-toggle" onclick="togglePassword('confirmPassword')">
+                                <i class="far fa-eye"></i>
+                            </span>
+                            <div class="invalid-feedback">Passwords do not match.</div>
+                        </div>
+
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="termsAgree" required>
+                            <label class="form-check-label" for="termsAgree">
+                                I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                            </label>
+                            <div class="invalid-feedback">You must agree to the terms to continue.</div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 mb-1">Create Account</button>
+
+                        <div class="text-center mt-4">
+                            <p>Already have an account? <a href="#" id="showLogin">Sign In</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        {{!-- 3D Section --}}
+        <div class="col-lg-7 d-none d-lg-block dashboard-preview p-0">
+            <div class="blob blob1"></div>
+            <div class="blob blob2"></div>
+            <div class="blob blob3"></div>
+            <spline-viewer url="https://prod.spline.design/JaqqhVOklzk6NfaJ/scene.splinecode" class="robot-3d"></spline-viewer>
+        </div>
+    </div>
+</div>
+
+<button id="themeToggle" class="btn btn-outline-light theme-toggle-btn" aria-label="Toggle theme">
+    <i class="fas fa-moon"></i>
+</button>
+
+{{! Page-specific JS }}
+<script src="/js/script.js"></script>
+<script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.80/build/spline-viewer.js"></script>
