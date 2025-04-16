@@ -7,8 +7,14 @@ const path = require('path');
 require('dotenv').config();
 const exphbs = require('express-handlebars');
 
+// Import middleware
+const authenticateToken = require('./middleware/auth');
+
 // Import User model from models/User.js
 const User = require('./models/User');
+
+// Import expense model from models/expense.js
+const Expense = require('./models/Expense');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -97,6 +103,30 @@ app.post('/api/login', async (req, res) => {
     }
 });
 
+// Add expense (with JWT protection)
+app.post('/api/expense', authenticateToken, async (req, res) => {
+    try {
+        const { description, amount, category, date } = req.body;
+
+        const newExpense = new Expense({
+            userId: req.user.id, // comes from token
+            description,
+            amount,
+            category,
+            date
+        });
+
+        await newExpense.save();
+
+        res.status(201).json({ message: 'Expense added successfully' });
+    } catch (error) {
+        console.error('Error adding expense:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
+
+
 // // Serve static HTML pages
 // app.get('/', (req, res) => {
 //     res.sendFile(path.join(__dirname, 'views', 'index.html'));
@@ -121,6 +151,25 @@ app.get('/', (req, res) => {
   app.get('/contact', (req, res) => {
     res.render('contact');  // uses views/contact.hbs
   });
+
+  app.get('/expense', (req, res) => {
+    res.render('expense');  // uses views/expense.hbs
+  });
+
+
+  app.get('/api/expenses', authenticateToken, async (req, res) => {
+    try {
+        const userId = req.user.id;
+
+        const expenses = await Expense.find({ userId: userId });
+
+        res.json(expenses);
+    } catch (err) {
+        console.error('Error fetching expenses:', err);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
   
 
 // Start server

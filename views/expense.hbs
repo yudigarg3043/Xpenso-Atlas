@@ -2,7 +2,7 @@
 
 {{!-- Page-specific CSS --}}
 <link rel="stylesheet" href="/css/style.css">
-<link rel="stylesheet" href="/css/dashboard.css">
+<link rel="stylesheet" href="/css/expense.css">
 
 <div class="dashboard-container">
     <!-- Sidebar -->
@@ -15,14 +15,14 @@
             <h5 class="user-name" id="userName">User Name</h5>
         </div>
         <ul class="nav-menu px-3">
-            <li class="nav-item active">
-                <a href="#"><i class="fas fa-th-large"></i> Dashboard</a>
+            <li class="nav-item">
+                <a href="/dashboard"><i class="fas fa-th-large"></i> Dashboard</a>
             </li>
             <li class="nav-item">
                 <a href="#"><i class="fas fa-wallet"></i> Income</a>
             </li>
-            <li class="nav-item">
-                <a href="/expense"><i class="fas fa-money-check-alt"></i> Expense</a>
+            <li class="nav-item active">
+                <a href="#"><i class="fas fa-money-check-alt"></i> Expense</a>
             </li>
         </ul>
         <div class="logout-container mt-auto px-3">
@@ -34,6 +34,7 @@
 
     <!-- Main Content -->
     <div class="main-content">
+
         <header class="dashboard-header">
             <div class="header-left">
                 <button class="menu-toggle" id="menuToggle">
@@ -51,31 +52,42 @@
                 <div class="col-md-8">
                     <div class="card summary-card">
                         <div class="card-body">
-                            <h3>Monthly Summary</h3>
-                            <div class="summary-stats">
-                                <div class="stat-item">
-                                    <span class="stat-label">Income</span>
-                                    <span class="stat-value income">$4,250.00</span>
-                                    <span class="stat-change positive">+12.5%</span>
+                            <div class="addexpense">
+                                <h2>Add New Expense</h2>
+                                <form id="expenseForm" class="expense-form">
+                                <div class="form-group">
+                                    <label for="description">Description:</label>
+                                    <input type="text" id="description" name="description" required>
                                 </div>
-                                <div class="stat-item">
-                                    <span class="stat-label">Expenses</span>
-                                    <span class="stat-value expenses">$2,840.75</span>
-                                    <span class="stat-change negative">+8.2%</span>
+                                <div class="form-group">
+                                    <label for="amount">Amount (₹):</label>
+                                    <input type="number" id="amount" name="amount" step="0.01" min="0" required>
                                 </div>
-                                <div class="stat-item">
-                                    <span class="stat-label">Savings</span>
-                                    <span class="stat-value savings">$1,409.25</span>
-                                    <span class="stat-change positive">+21.3%</span>
+                                <div class="form-group">
+                                    <label for="category">Category:</label>
+                                    <select id="category" name="category" required>
+                                    <option value="Food">Food</option>
+                                    <option value="Transport">Transport</option>
+                                    <option value="Entertainment">Entertainment</option>
+                                    <option value="Bills">Bills</option>
+                                    <option value="Shopping">Shopping</option>
+                                    <option value="Other">Other</option>
+                                    </select>
                                 </div>
+                                <div class="form-group">
+                                    <label for="date">Date:</label>
+                                    <input type="date" id="date" name="date" required>
+                                </div>
+                                <button type="submit">Add Expense</button>
+                                </form>
                             </div>
                         </div>
                     </div>
 
                     <div class="card chart-card">
                         <div class="card-body">
-                            <h3>Expense Breakdown</h3>
-                            <canvas id="expenseChart"></canvas>
+                            <center><h3 class="headTitle">Expense Breakdown</h3></center>
+                            <canvas id="expenseChart" width="400" height="400"></canvas>
                         </div>
                     </div>
                 </div>
@@ -171,4 +183,4 @@
 
 {{!-- Page-specific JS --}}
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="/js/dashboard.js"></script>
+<script src="/js/expense.js"></script>
