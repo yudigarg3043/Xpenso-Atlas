@@ -7,15 +7,18 @@
     <div class="left">
         <h3 class="heading">Get In Touch</h3>
         <p class="text">We are here for you! How can we help?</p>
-        <form novalidate>
+        <form id="contactForm" novalidate>
             <div class="inputBox">
-                <input type="text" name="name" class="name" placeholder="Enter your name" required />
+                <input type="text" id="name" name="name" class="name" placeholder="Enter your name" required />
             </div>
             <div class="inputBox">
-                <input type="text" name="email" class="email" placeholder="Enter your email address" required />
+                <input type="text" id="email" name="email" class="email" placeholder="Enter your email address" required />
             </div>
             <div class="inputBox">
-                <textarea name="message" class="message" placeholder="Enter your message..." required></textarea>
+                <input type="text" id="contactDetails" name="contactDetails" class="contactDetails" placeholder="Enter your contact details" required />
+            </div>
+            <div class="inputBox">
+                <textarea name="message" id="message" class="message" placeholder="Enter your message..." required></textarea>
             </div>
             <button class="btn" type="submit">Submit</button>
         </form>

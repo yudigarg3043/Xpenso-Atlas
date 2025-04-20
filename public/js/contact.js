@@ -4,16 +4,16 @@ const inputs = document.querySelectorAll("input");
 const textareas = document.querySelectorAll("textarea");
 const allFields = [...inputs, ...textareas];
 
-form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    if (!validateForm(form)) return;
+// form.addEventListener("submit", (e) => {
+//     e.preventDefault();
+//     if (!validateForm(form)) return;
 
-    alert("Message successfully sent");
-    form.reset();
-    setTimeout(() => {
-        location.reload();
-    }, 100);
-});
+//     alert("Message successfully sent");
+//     form.reset();
+//     setTimeout(() => {
+//         location.reload();
+//     }, 100);
+// });
 
 const validateForm = (form) => {
     let valid = true;
@@ -82,4 +82,37 @@ toggleBtn.addEventListener("click", () => {
 
     toggleBtn.textContent = isDark ? "☀️" : "🌙";
     localStorage.setItem("theme", isDark ? "dark" : "light");
+});
+
+document.getElementById('contactForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const contactDetails = document.getElementById('contactDetails').value;
+    const message = document.getElementById('message').value;
+
+    const contactData = { name, email, contactDetails, message };
+
+    try {
+        const res = await fetch('/api/contact', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(contactData)
+        });
+
+        const result = await res.json();
+
+        if (res.status === 201) {
+            alert('Message sent successfully!');
+            document.getElementById('contactForm').reset();
+        } else {
+            alert(result.message || 'Failed to send message.');
+        }
+    } catch (err) {
+        console.error('Error:', err);
+        alert('An error occurred while sending the message.');
+    }
 });

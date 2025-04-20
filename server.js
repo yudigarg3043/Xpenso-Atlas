@@ -16,6 +16,9 @@ const User = require('./models/User');
 // Import expense model from models/expense.js
 const Expense = require('./models/Expense');
 
+// Import contact model from models/contact.js
+const Contact = require('./models/contact');
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -125,6 +128,26 @@ app.post('/api/expense', authenticateToken, async (req, res) => {
     }
 });
 
+
+app.post('/api/contact', async (req, res) => {
+    try {
+        const { name, email, contactDetails, message } = req.body;
+
+        const newContact = new Contact({
+            name,
+            email,
+            contactDetails,
+            message
+        });
+
+        await newContact.save();
+
+        res.status(201).json({ message: 'Message sent successfully!' });
+    } catch (error) {
+        console.error('Error saving contact message:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
 
 
 // // Serve static HTML pages
