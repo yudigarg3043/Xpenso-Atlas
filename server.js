@@ -192,9 +192,6 @@ app.get('/', (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 });
-
-  
-
 // Start server
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);

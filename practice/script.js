@@ -86,3 +86,4 @@ document.getElementById("submitIncome").addEventListener("click", () => {
 
   modal.style.display = "none";
 });
+
