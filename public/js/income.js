@@ -30,7 +30,7 @@ document.getElementById('incomeForm').addEventListener('submit', async function 
     const category = document.getElementById('category').value;
     const date = document.getElementById('date').value;
 
-    const expenseData = { description, amount, category, date };
+    const incomeData = { description, amount, category, date };
 
     const token = localStorage.getItem('token');
 
@@ -41,7 +41,7 @@ document.getElementById('incomeForm').addEventListener('submit', async function 
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             },
-            body: JSON.stringify(expenseData)
+            body: JSON.stringify(incomeData)
         });
 
         const result = await res.json();

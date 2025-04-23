@@ -19,6 +19,9 @@ const Expense = require('./models/Expense');
 // Import expense model from models/income.js
 const Income = require('./models/Income');
 
+// Import contact model from models/contact.js
+const Contact = require('./models/contact');
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -150,6 +153,26 @@ app.post('/api/income', authenticateToken, async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 });
+app.post('/api/contact', async (req, res) => {
+    try {
+        const { name, email, contactDetails, message } = req.body;
+
+        const newContact = new Contact({
+            name,
+            email,
+            contactDetails,
+            message
+        });
+
+        await newContact.save();
+
+        res.status(201).json({ message: 'Message sent successfully!' });
+    } catch (error) {
+        console.error('Error saving contact message:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
 
 // // Serve static HTML pages
 // app.get('/', (req, res) => {
