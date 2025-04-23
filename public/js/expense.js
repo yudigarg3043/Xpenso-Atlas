@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             const data = await res.json();
             const list = document.querySelector('.transaction-list');
             list.innerHTML = ''; // Clear old
-
+    
             data.forEach(item => {
                 const li = document.createElement('li');
                 li.classList.add('transaction-item');
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                         <i class="fas fa-receipt"></i>
                     </div>
                     <div class="transaction-details">
-                        <span class="transaction-title">${item.description}</span>
+                        <span class="transaction-title">${item.category}</span>
                         <span class="transaction-date">${new Date(item.date).toLocaleDateString()}</span>
                     </div>
                     <span class="transaction-amount expense">-₹${item.amount.toFixed(2)}</span>

@@ -16,6 +16,9 @@ const User = require('./models/User');
 // Import expense model from models/expense.js
 const Expense = require('./models/Expense');
 
+// Import expense model from models/income.js
+const Income = require('./models/Income');
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -126,6 +129,27 @@ app.post('/api/expense', authenticateToken, async (req, res) => {
 });
 
 
+// Add income (with JWT protection)
+app.post('/api/income', authenticateToken, async (req, res) => {
+    try {
+        const { description, amount, category, date } = req.body;
+
+        const newIncome = new Income({
+            userId: req.user.id, // comes from token
+            description,
+            amount,
+            category,
+            date
+        });
+
+        await newIncome.save();
+
+        res.status(201).json({ message: 'Income added successfully' });
+    } catch (error) {
+        console.error('Error adding income:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
 
 // // Serve static HTML pages
 // app.get('/', (req, res) => {
@@ -156,8 +180,25 @@ app.get('/', (req, res) => {
     res.render('expense');  // uses views/expense.hbs
   });
 
+  app.get('/income', (req,res) => {
+    res.render('income');
+  })
+
 
   app.get('/api/expenses', authenticateToken, async (req, res) => {
+    try {
+        const userId = req.user.id;
+
+        const expenses = await Expense.find({ userId: userId });
+
+        res.json(expenses);
+    } catch (err) {
+        console.error('Error fetching expenses:', err);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
+app.get('/api/expenses/recent', authenticateToken, async (req, res) => {
     try {
         const userId = req.user.id;
 

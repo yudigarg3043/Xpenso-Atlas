@@ -2,7 +2,7 @@
 
 {{!-- Page-specific CSS --}}
 <link rel="stylesheet" href="/css/style.css">
-<link rel="stylesheet" href="/css/expense.css">
+<link rel="stylesheet" href="/css/income.css">
 
 <div class="dashboard-container">
     <!-- Sidebar -->
@@ -18,11 +18,11 @@
             <li class="nav-item">
                 <a href="/dashboard"><i class="fas fa-th-large"></i> Dashboard</a>
             </li>
-            <li class="nav-item">
-                <a href="/income"><i class="fas fa-wallet"></i> Income</a>
-            </li>
             <li class="nav-item active">
-                <a href="#"><i class="fas fa-money-check-alt"></i> Expense</a>
+                <a href="#"><i class="fas fa-wallet"></i> Income</a>
+            </li>
+            <li class="nav-item">
+                <a href="/expense"><i class="fas fa-money-check-alt"></i> Expense</a>
             </li>
         </ul>
         <div class="logout-container mt-auto px-3">
@@ -40,7 +40,7 @@
                 <button class="menu-toggle" id="menuToggle">
                     <i class="fas fa-bars"></i>
                 </button>
-                <h2>Expense Tracker</h2>
+                <h2>Income Tracker</h2>
             </div>
             <div class="header-right">
                 {{!-- Optional user profile section --}}
@@ -53,8 +53,8 @@
                     <div class="card summary-card">
                         <div class="card-body">
                             <div class="addexpense">
-                                <h2>Add New Expense</h2>
-                                <form id="expenseForm" class="expense-form">
+                                <h2>Add New Income</h2>
+                                <form id="incomeForm" class="expense-form">
                                 <div class="form-group">
                                     <label for="description">Description:</label>
                                     <input type="text" id="description" name="description" required>
@@ -66,19 +66,18 @@
                                 <div class="form-group">
                                     <label for="category">Category:</label>
                                     <select id="category" name="category" required>
-                                    <option value="Food">Food</option>
-                                    <option value="Transport">Transport</option>
-                                    <option value="Entertainment">Entertainment</option>
-                                    <option value="Bills">Bills</option>
-                                    <option value="Shopping">Shopping</option>
-                                    <option value="Other">Other</option>
+                                    <option value="Salary">Salary</option>
+                                    <option value="Stock Investment">Stock Investment</option>
+                                    <option value="Mutual Funds">Mutual Funds</option>
+                                    <option value="Dividend">Dividend</option>
+                                    <option value="Other Sources">Other Sources</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="date">Date:</label>
                                     <input type="date" id="date" name="date" required>
                                 </div>
-                                <button type="submit">Add Expense</button>
+                                <button type="submit">Add Income</button>
                                 </form>
                             </div>
                         </div>
@@ -86,7 +85,7 @@
 
                     <div class="card chart-card">
                         <div class="card-body">
-                            <center><h3 class="headTitle">Expense Breakdown</h3></center>
+                            <center><h3 class="headTitle">Income Breakdown</h3></center>
                             <canvas id="expenseChart" width="400" height="400"></canvas>
                         </div>
                     </div>
@@ -95,17 +94,17 @@
                 <div class="col-md-4">
                     <div class="card recent-transactions">
                         <div class="card-body">
-                            <h3>Recent Transactions</h3>
-                            {{!-- <ul class="transaction-list">
+                            <h3>Recent Earnings</h3>
+                            <ul class="transaction-list">
                                 <li class="transaction-item">
-                                    <div class="transaction-icon expense">
-                                        <i class="fas fa-shopping-cart"></i>
+                                    <div class="transaction-icon income">
+                                        <i class="fas fa-money-bill"></i>
                                     </div>
                                     <div class="transaction-details">
-                                        <span class="transaction-title">Grocery Shopping</span>
+                                        <span class="transaction-title">Mutual Funds</span>
                                         <span class="transaction-date">Today, 2:30 PM</span>
                                     </div>
-                                    <span class="transaction-amount expense">-$85.20</span>
+                                    <span class="transaction-amount income">+$85.20</span>
                                 </li>
                                 <li class="transaction-item">
                                     <div class="transaction-icon income">
@@ -118,27 +117,26 @@
                                     <span class="transaction-amount income">+$2,750.00</span>
                                 </li>
                                 <li class="transaction-item">
-                                    <div class="transaction-icon expense">
-                                        <i class="fas fa-utensils"></i>
+                                    <div class="transaction-icon income">
+                                        <i class="fas fa-money-bill-trend-up"></i>
                                     </div>
                                     <div class="transaction-details">
-                                        <span class="transaction-title">Restaurant</span>
+                                        <span class="transaction-title">Stock Investment</span>
                                         <span class="transaction-date">Mar 20, 2025</span>
                                     </div>
-                                    <span class="transaction-amount expense">-$42.50</span>
+                                    <span class="transaction-amount income">+$42.50</span>
                                 </li>
                                 <li class="transaction-item">
-                                    <div class="transaction-icon expense">
-                                        <i class="fas fa-gas-pump"></i>
+                                    <div class="transaction-icon income">
+                                        <i class="fas fa-wallet"></i>
                                     </div>
                                     <div class="transaction-details">
-                                        <span class="transaction-title">Fuel</span>
+                                        <span class="transaction-title">Other Sources</span>
                                         <span class="transaction-date">Mar 18, 2025</span>
                                     </div>
-                                    <span class="transaction-amount expense">-$65.75</span>
+                                    <span class="transaction-amount income">+$65.75</span>
                                 </li>
-                            </ul> --}}
-                            <ul class="transaction-list"></ul>
+                            </ul>
                             <a href="#" class="btn btn-outline-primary btn-sm view-all">View All Transactions</a>
                         </div>
                     </div>
@@ -148,7 +146,7 @@
                             <h3>Budget Status</h3>
                             <div class="budget-item">
                                 <div class="budget-info">
-                                    <span class="budget-category">Food & Groceries</span>
+                                    <span class="budget-category">Salary</span>
                                     <span class="budget-progress">$420/$500</span>
                                 </div>
                                 <div class="progress">
@@ -157,7 +155,7 @@
                             </div>
                             <div class="budget-item">
                                 <div class="budget-info">
-                                    <span class="budget-category">Transportation</span>
+                                    <span class="budget-category">Mutual Funds</span>
                                     <span class="budget-progress">$280/$300</span>
                                 </div>
                                 <div class="progress">
@@ -166,7 +164,7 @@
                             </div>
                             <div class="budget-item">
                                 <div class="budget-info">
-                                    <span class="budget-category">Entertainment</span>
+                                    <span class="budget-category">Other Sources</span>
                                     <span class="budget-progress">$150/$200</span>
                                 </div>
                                 <div class="progress">
@@ -179,9 +177,4 @@
             </div>
         </div>
     </div>
-
 </div>
-
-{{!-- Page-specific JS --}}
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="/js/expense.js"></script>
