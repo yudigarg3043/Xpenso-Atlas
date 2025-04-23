@@ -234,6 +234,19 @@ app.get('/api/expenses/recent', authenticateToken, async (req, res) => {
     }
 });
 
+//Fetching Recent Earnings
+app.get('/api/income/recent', authenticateToken, async (req, res) => {
+    try {
+        const userId = req.user.id;
+
+        const income = await Income.find({ userId: userId });
+
+        res.json(income);
+    } catch (err) {
+        console.error('Error fetching earnings:', err);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
   
 
 // Start server

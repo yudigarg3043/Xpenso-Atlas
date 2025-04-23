@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 li.classList.add('transaction-item');
                 li.innerHTML = `
                     <div class="transaction-icon expense">
-                        <i class="fas fa-receipt"></i>
+                        <i class="${item.category === 'Food' ? 'fas fa-utensils' : item.category === 'Transport' ? 'fas fa-gas-pump' : item.category === 'Entertainment' ? 'fas fa-face-smile' : item.category === 'Bills' ? 'fas fa-receipt' : item.category === 'Shopping' ? 'fas fa-shopping-cart' : 'fas fa-indian-rupee-sign'}"></i>
                     </div>
                     <div class="transaction-details">
                         <span class="transaction-title">${item.category}</span>

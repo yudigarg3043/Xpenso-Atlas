@@ -17,6 +17,36 @@ document.addEventListener('DOMContentLoaded', async function () {
         sidebar.classList.toggle('active');
     });
     
+    // 🟢 Fetch and display recent Earnings
+    async function loadRecentEarnings() {
+        try {
+            const res = await fetch('/api/income/recent', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            const data = await res.json();
+            const list = document.querySelector('.transaction-list');
+            list.innerHTML = ''; // Clear old
+    
+            data.forEach(item => {
+                const li = document.createElement('li');
+                li.classList.add('transaction-item');
+                li.innerHTML = `
+                    <div class="transaction-icon income">
+                        <i class="${item.category === 'Salary' ? 'fas fa-money-check' : item.category === 'Stock Investment' ? 'fas fa-money-bill-trend-up' : item.category === 'Mutual Funds' ? 'fas fa-money-bill' : item.category === 'Dividend' ? 'fas fa-coins' : 'fas fa-wallet'}"></i>
+                    </div>
+                    <div class="transaction-details">
+                        <span class="transaction-title">${item.category}</span>
+                        <span class="transaction-date">${new Date(item.date).toLocaleDateString()}</span>
+                    </div>
+                    <span class="transaction-amount income">+₹${item.amount.toFixed(2)}</span>
+                `;
+                list.appendChild(li);
+            });
+        } catch (err) {
+            console.error('Error loading transactions:', err);
+        }
+    }
+    loadRecentEarnings();
 
 });
 
