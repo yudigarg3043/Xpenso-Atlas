@@ -95,6 +95,49 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
     }
     loadRecentTransactions();
+
+
+    fetch('/api/expenses/total-per-category', {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+        .then(async (response) => {
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Unauthorized');
+            }
+            return response.json();
+        })
+        .then(data => {
+            const container = document.getElementById('status');
+
+            data.forEach(item => {
+                const { category, spent, total, percentage } = item;
+
+                const percentValue = parseFloat(percentage);
+                const progressClass = percentValue < 70 ? 'bg-success' :
+                                      percentValue < 90 ? 'bg-warning' : 'bg-danger';
+
+                const budgetItemHTML = `
+                    <div class="budget-item mb-3">
+                        <div class="budget-info d-flex justify-content-between">
+                            <span class="budget-category">${category}</span>
+                            <span class="budget-progress">₹${spent}/₹${total} (${percentage}%)</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar ${progressClass}" role="progressbar" style="width: ${percentValue}%"></div>
+                        </div>
+                    </div>
+                `;
+
+                container.insertAdjacentHTML('beforeend', budgetItemHTML);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching budget data:', error.message);
+        });
+
     
 
 });

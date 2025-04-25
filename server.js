@@ -247,7 +247,123 @@ app.get('/api/income/recent', authenticateToken, async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 });
-  
+
+app.get('/api/incomes', authenticateToken, async (req, res) => {
+    try {
+        const userId = req.user.id;
+
+        const incomes = await Income.find({ userId: userId });
+
+        res.json(incomes);
+    } catch (err) {
+        console.error('Error fetching earnings:', err);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
+app.get('/api/expenses/total-per-category', authenticateToken, async (req, res) => {
+    try {
+        const userId = req.user.id;
+
+        const expenses = await Expense.find({ userId });
+
+        const categoryLimits = {
+            'Food': 500,
+            'Transport': 300,
+            'Entertainment': 600,
+            'Bills':400,
+            'Shopping': 200,
+            'Other':100
+        };
+
+        const categoryTotals = {};
+
+        // Calculate total spent per category
+        expenses.forEach(exp => {
+            const category = exp.category;
+            const amount = exp.amount;
+
+            if (category in categoryLimits) {
+                if (!categoryTotals[category]) categoryTotals[category] = 0;
+                categoryTotals[category] += amount;
+            }
+        });
+
+        const grandTotal = Object.values(categoryTotals).reduce((sum, val) => sum + val, 0);
+
+        // Format result
+        const budgetStatus = Object.keys(categoryLimits).map(category => {
+            const spent = categoryTotals[category] || 0;
+            const limit = categoryLimits[category]; // optional now
+            const percentage = grandTotal > 0 ? ((spent / grandTotal) * 100).toFixed(2) : 0;
+
+            return {
+                category,
+                spent,
+                total: grandTotal,
+                percentage // percentage of total spend
+            };
+        });
+
+        res.json(budgetStatus);
+
+    } catch (err) {
+        console.error('Error calculating budget status:', err);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
+
+app.get('/api/incomes/total-per-category', authenticateToken, async (req, res) => {
+    try {
+        const userId = req.user.id;
+
+        const incomes = await Income.find({ userId });
+
+        const categoryLimits = {
+            'Salary': 500,
+            'Stock Investment': 300,
+            'Mutual Funds': 600,
+            'Dividend':400,
+            'Other Sources':100
+        };
+
+        const categoryTotals = {};
+
+        // Calculate total spent per category
+        incomes.forEach(exp => {
+            const category = exp.category;
+            const amount = exp.amount;
+
+            if (category in categoryLimits) {
+                if (!categoryTotals[category]) categoryTotals[category] = 0;
+                categoryTotals[category] += amount;
+            }
+        });
+
+        const grandTotal = Object.values(categoryTotals).reduce((sum, val) => sum + val, 0);
+
+        // Format result
+        const budgetStatus = Object.keys(categoryLimits).map(category => {
+            const spent = categoryTotals[category] || 0;
+            const limit = categoryLimits[category]; // optional now
+            const percentage = grandTotal > 0 ? ((spent / grandTotal) * 100).toFixed(2) : 0;
+
+            return {
+                category,
+                spent,
+                total: grandTotal,
+                percentage // percentage of total spend
+            };
+        });
+
+        res.json(budgetStatus);
+
+    } catch (err) {
+        console.error('Error calculating budget status:', err);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
 
 // Start server
 app.listen(PORT, () => {

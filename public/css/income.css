@@ -9,6 +9,9 @@
     width: 250px;
     background-color: var(--white);
     min-height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
     display: flex;
     flex-direction: column;
     border-right: 1px solid #eee;
@@ -19,7 +22,7 @@
     background-color: var(--light-bg);
     padding: 1.5rem;
     transition: all 0.3s ease;
-    /* margin-left: 250px; */
+    margin-left: 250px;
 }
 
 /* Responsive Styles */
@@ -141,6 +144,7 @@
     font-size: 1.25rem;
     margin-right: 1rem;
     cursor: pointer;
+    color: white;
 }
 
 .header-right {

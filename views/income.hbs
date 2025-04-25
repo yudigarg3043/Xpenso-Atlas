@@ -8,7 +8,7 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="logo-container text-center py-3">
-            <h2 class="logo">Expense Tracker</h2>
+            <h2 class="logo">Xpenso</h2>
         </div>
         <div class="text-center my-3">
             <img src="https://cdn-icons-png.flaticon.com/512/4140/4140037.png" alt="Avatar" class="avatar-img mb-2">
@@ -144,9 +144,10 @@
                     <div class="card budget-card">
                         <div class="card-body">
                             <h3>Budget Status</h3>
-                            <div class="budget-item">
-                                <div class="budget-info">
-                                    <span class="budget-category">Salary</span>
+                            <div id="status"></div>
+                             {{!-- <div class="budget-item"> --}}
+                                {{!--<div class="budget-info">
+                                    <span class="budget-category">Food & Groceries</span>
                                     <span class="budget-progress">$420/$500</span>
                                 </div>
                                 <div class="progress">
@@ -155,7 +156,7 @@
                             </div>
                             <div class="budget-item">
                                 <div class="budget-info">
-                                    <span class="budget-category">Mutual Funds</span>
+                                    <span class="budget-category">Transportation</span>
                                     <span class="budget-progress">$280/$300</span>
                                 </div>
                                 <div class="progress">
@@ -164,13 +165,13 @@
                             </div>
                             <div class="budget-item">
                                 <div class="budget-info">
-                                    <span class="budget-category">Other Sources</span>
+                                    <span class="budget-category">Entertainment</span>
                                     <span class="budget-progress">$150/$200</span>
                                 </div>
                                 <div class="progress">
                                     <div class="progress-bar bg-info" role="progressbar" style="width: 75%"></div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -179,4 +180,5 @@
     </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="/js/income.js"></script>
