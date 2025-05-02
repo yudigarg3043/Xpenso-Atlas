@@ -16,11 +16,14 @@ const User = require('./models/User');
 // Import expense model from models/expense.js
 const Expense = require('./models/Expense');
 
-// Import expense model from models/income.js
+// Import income model from models/income.js
 const Income = require('./models/Income');
 
 // Import contact model from models/contact.js
 const Contact = require('./models/contact');
+
+// Import transaction model from models/contact.js
+const Transaction = require('./models/Transaction');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -122,7 +125,21 @@ app.post('/api/expense', authenticateToken, async (req, res) => {
             date
         });
 
-        await newExpense.save();
+        const savedExpense = await newExpense.save();
+
+        // 2️⃣ Create and save the corresponding transaction record
+        const newTransaction = new Transaction({
+            userId: req.user.id,
+            type: 'expense',
+            incomeRef: null,
+            expenseRef: savedExpense._id,
+            description,
+            amount,
+            category,
+            date
+        });
+
+        await newTransaction.save();
 
         res.status(201).json({ message: 'Expense added successfully' });
     } catch (error) {
@@ -145,7 +162,21 @@ app.post('/api/income', authenticateToken, async (req, res) => {
             date
         });
 
-        await newIncome.save();
+        const savedIncome = await newIncome.save();
+
+        // 2️⃣ Create and save the corresponding transaction record
+        const newTransaction = new Transaction({
+            userId: req.user.id,
+            type: 'income',
+            incomeRef: savedIncome._id,
+            expenseRef: null,
+            description,
+            amount,
+            category,
+            date
+        });
+
+        await newTransaction.save();
 
         res.status(201).json({ message: 'Income added successfully' });
     } catch (error) {
@@ -242,6 +273,20 @@ app.get('/api/income/recent', authenticateToken, async (req, res) => {
         const income = await Income.find({ userId: userId });
 
         res.json(income);
+    } catch (err) {
+        console.error('Error fetching earnings:', err);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
+//Fetching Recent Transactions
+app.get('/api/transaction/recent', authenticateToken, async (req, res) => {
+    try {
+        const userId = req.user.id;
+
+        const transaction = await Transaction.find({ userId: userId });
+
+        res.json(transaction);
     } catch (err) {
         console.error('Error fetching earnings:', err);
         res.status(500).json({ message: 'Server error' });

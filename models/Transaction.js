@@ -1,11 +1,25 @@
 const mongoose = require('mongoose');
 
-// Income Schema
-const IncomeSchema = new mongoose.Schema({
+const TransactionSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true
+    },
+    type: {
+        type: String,
+        enum: ['income', 'expense'],
+        required: true
+    },
+    incomeRef: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'income',
+        default: null
+    },
+    expenseRef: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'expense',
+        default: null
     },
     description: {
         type: String,
@@ -30,5 +44,5 @@ const IncomeSchema = new mongoose.Schema({
     }
 });
 
-const Income = mongoose.model('income', IncomeSchema); // keep lowercase if that's what you're using
-module.exports = Income;
+const Transaction = mongoose.model('transaction', TransactionSchema);
+module.exports = Transaction;

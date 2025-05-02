@@ -69,32 +69,58 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    fetchTransactions();
-});
+    // 🟢 Fetch and display recent Transactions (Top 5 by date)
+async function loadRecentTransaction() {
+    try {
+        const res = await fetch('/api/transaction/recent', {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        let data = await res.json();
 
-function fetchTransactions() {
-    const token = localStorage.getItem('token');
-    // This would normally be a fetch request to your API
-    // For demo purposes, we're using mock data
-    
-    // Example of how the fetch would look:
-    /*
-    fetch('/api/transactions', {
-        method: 'GET',
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        // Process and display transactions
-        displayTransactions(data.transactions);
-    })
-    .catch(error => {
-        console.error('Error fetching transactions:', error);
-    });
-    */
-    
-    // For now, we'll just use the mock data already in the HTML
+        // Sort by date descending
+        data.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        // Take the first 5
+        const recentFive = data.slice(0, 5);
+
+        const list = document.querySelector('.transaction-list');
+        list.innerHTML = ''; // Clear old list
+
+        recentFive.forEach(item => {
+            const li = document.createElement('li');
+            li.classList.add('transaction-item');
+            
+            const typeClass = item.type === 'expense' ? 'expense' : 'income';
+            const iconClass = item.type === 'income'
+                ? (item.category === 'Salary' ? 'fas fa-money-check' :
+                    item.category === 'Stock Investment' ? 'fas fa-money-bill-trend-up' : 
+                    item.category === 'Mutual Funds' ? 'fas fa-money-bill' : 
+                    item.category === 'Dividend' ? 'fas fa-coins' : 
+                    'fas fa-wallet')
+                : (item.category === 'Food' ? 'fas fa-utensils' : 
+                    item.category === 'Transport' ? 'fas fa-gas-pump' : 
+                    item.category === 'Entertainment' ? 'fas fa-face-smile' : 
+                    item.category === 'Bills' ? 'fas fa-receipt' : 
+                    item.category === 'Shopping' ? 'fas fa-shopping-cart' : 
+                    'fas fa-indian-rupee-sign');
+        
+            const amountPrefix = item.type === 'expense' ? '-' : '+';
+        
+            li.innerHTML = `
+                <div class="transaction-icon ${typeClass}">
+                    <i class="${iconClass}"></i>
+                </div>
+                <div class="transaction-details">
+                    <span class="transaction-title">${item.category}</span>
+                    <span class="transaction-date">${new Date(item.date).toLocaleDateString()}</span>
+                </div>
+                <span class="transaction-amount ${typeClass}">${amountPrefix}₹${item.amount.toFixed(2)}</span>
+            `;
+            list.appendChild(li);
+        });
+    } catch (err) {
+        console.error('Error loading transactions:', err);
+    }
 }
+    loadRecentTransaction();
+});

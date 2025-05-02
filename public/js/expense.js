@@ -17,6 +17,18 @@ document.addEventListener('DOMContentLoaded', async function () {
         sidebar.classList.toggle('active');
     });
 
+    // 👉 Close sidebar on outside click (only for small screens)
+    document.addEventListener('click', function(event) {
+        if (
+            window.innerWidth <= 991.98 &&               // Only on mobile
+            sidebar.classList.contains('active') &&      // Sidebar is open
+            !sidebar.contains(event.target) &&           // Click is outside sidebar
+            !menuToggle.contains(event.target)           // Click is not the toggle button
+        ) {
+            sidebar.classList.remove('active');
+        }
+    });
+
     // 🟢 Fetch expenses and render the doughnut chart
     try {
         const res = await fetch('/api/expenses', {
