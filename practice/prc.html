@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+<<<<<<< HEAD
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Income Tracker</title>
   <link rel="stylesheet" href="style.css" />
@@ -68,3 +69,136 @@
   <script src="script.js"></script>
 </body>
 </html>
+=======
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Live Chat Support</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f1f1f1;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .chat-container {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .chat-container h2 {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .chat-box {
+      height: 300px;
+      overflow-y: auto;
+      border: 1px solid #ddd;
+      padding: 10px;
+      background: #f9f9f9;
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
+
+    .user-message, .bot-message {
+      margin: 8px 0;
+      padding: 10px 15px;
+      border-radius: 15px;
+      max-width: 80%;
+      display: inline-block;
+    }
+
+    .user-message {
+      background: #d1e7dd;
+      align-self: flex-end;
+      text-align: right;
+      float: right;
+      clear: both;
+    }
+
+    .bot-message {
+      background: #e2e3e5;
+      align-self: flex-start;
+      float: left;
+      clear: both;
+    }
+
+    .input-container {
+      display: flex;
+      gap: 10px;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      background-color: #0d6efd;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #084298;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <h2>💬 Live Chat Support</h2>
+    <div id="chat-box" class="chat-box"></div>
+    <div class="input-container">
+      <input type="text" id="user-input" placeholder="Type your message..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    function sendMessage() {
+      const input = document.getElementById('user-input');
+      const chatBox = document.getElementById('chat-box');
+      const message = input.value.trim();
+      if (!message) return;
+
+      // Show user message
+      chatBox.innerHTML += `<div class="user-message">You: ${message}</div>`;
+      input.value = '';
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      // Simulate bot reply
+      setTimeout(() => {
+        const reply = getBotReply(message);
+        chatBox.innerHTML += `<div class="bot-message">Bot: ${reply}</div>`;
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }, 500);
+    }
+
+    function getBotReply(message) {
+      const text = message.toLowerCase();
+
+      if (text.includes("hello") || text.includes("hi")) {
+        return "👋 Hi there! How can I assist you today?";
+      } else if (text.includes("add expense")) {
+        return "🧾 To add an expense, go to the Dashboard and click 'Add Expense'.";
+      } else if (text.includes("contact")) {
+        return "📞 You can contact us via the support page's message form.";
+      } else if (text.includes("track")) {
+        return "📊 You can view and track your expenses from the Dashboard.";
+      } else {
+        return "🤖 Sorry, I didn't understand that. Try asking about tracking or adding expenses.";
+      }
+    }
+  </script>
+</body>
+</html>
+>>>>>>> 90d8179 (TOGGLE THEME IN INCOME AND EXPNESE)

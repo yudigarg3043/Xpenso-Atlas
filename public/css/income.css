@@ -3,7 +3,59 @@
     display: flex;
     min-height: 100vh;
 }
+<<<<<<< HEAD
 
+=======
+:root {
+    --primary-color: #7c4dff;
+    --secondary-color: #b388ff;
+    --addexpense-color: #1c1f3f;
+    --accent-color: #18ffff;
+    --success-color: #00e676;
+    --input-color: #2c2f4f;
+    --text-color: white;
+    --light-bg: #0f0f1a;
+    --white: #1a1a2e;
+    --shadow: 0 4px 12px rgba(124, 77, 255, 0.2);
+    --border-radius: 12px;
+
+    .light-theme {
+        --primary-color: #7c4dff;
+        --secondary-color: #b388ff;
+        --addexpense-color: #ffffff;
+        --accent-color: #00bcd4;
+        --success-color: #00c853;
+        --input-color: #f5f5f5;
+        --text-color: #111;
+        --light-bg: #f5f5f5;
+        --white: #ffffff;
+        --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+}
+h2{
+    color: var(--text-color);
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    border-radius: 50%;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0f0f1a, #1a1a2e);
+    color: var(--text-color);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+>>>>>>> 90d8179 (TOGGLE THEME IN INCOME AND EXPNESE)
 /* Sidebar */
 .sidebar {
     width: 250px;
@@ -17,6 +69,13 @@
     border-right: 1px solid #eee;
 }
 
+<<<<<<< HEAD
+=======
+.sidebar .nav-item a{
+    color: var(--text-color);
+}
+
+>>>>>>> 90d8179 (TOGGLE THEME IN INCOME AND EXPNESE)
 .main-content {
     flex-grow: 1;
     background-color: var(--light-bg);
@@ -98,7 +157,11 @@
 }
 
 .nav-item a:hover {
+<<<<<<< HEAD
     background-color: #f2f2f2;
+=======
+    background-color: #8758FF;
+>>>>>>> 90d8179 (TOGGLE THEME IN INCOME AND EXPNESE)
     color: #111
 }
 
@@ -108,7 +171,11 @@
 }
 
 .logout-btn {
+<<<<<<< HEAD
     color: white;
+=======
+    color: var(--text-color);
+>>>>>>> 90d8179 (TOGGLE THEME IN INCOME AND EXPNESE)
     font-weight: 500;
     padding: 12px 15px;
     text-decoration: none;
@@ -120,7 +187,11 @@
 }
 
 .logout-btn:hover {
+<<<<<<< HEAD
     background-color: #f2f2f2;
+=======
+    background-color: #8758FF;
+>>>>>>> 90d8179 (TOGGLE THEME IN INCOME AND EXPNESE)
     color: #111;
 }
 
@@ -249,7 +320,11 @@
 
 /* Add Expnese  */
 .addexpense {
+<<<<<<< HEAD
     background-color: #1c1f3f;
+=======
+    background-color: var(--addexpense-color);
+>>>>>>> 90d8179 (TOGGLE THEME IN INCOME AND EXPNESE)
     color: #fff;
     padding: 20px;
     border-radius: 16px;
@@ -274,7 +349,11 @@
 .form-group label {
     margin-bottom: 5px;
     font-weight: 600;
+<<<<<<< HEAD
     color: #ccc;
+=======
+    color: var(--text-color);
+>>>>>>> 90d8179 (TOGGLE THEME IN INCOME AND EXPNESE)
 }
 
 .form-group input,
@@ -282,8 +361,13 @@
     padding: 10px 12px;
     border-radius: 10px;
     border: none;
+<<<<<<< HEAD
     background-color: #2c2f4f;
     color: #fff;
+=======
+    background-color: var(--input-color); 
+    color: var(--text-color);
+>>>>>>> 90d8179 (TOGGLE THEME IN INCOME AND EXPNESE)
     font-size: 16px;
     transition: all 0.3s ease;
 }
@@ -292,7 +376,11 @@
 .form-group select:focus {
     outline: none;
     box-shadow: 0 0 10px rgba(114, 137, 218, 0.6);
+<<<<<<< HEAD
     background-color: #3b3f6b;
+=======
+    background-color: var(--shadow);
+>>>>>>> 90d8179 (TOGGLE THEME IN INCOME AND EXPNESE)
 }
 
 button[type="submit"] {

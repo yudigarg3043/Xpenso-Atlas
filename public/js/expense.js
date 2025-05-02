@@ -184,3 +184,21 @@ document.getElementById('expenseForm').addEventListener('submit', async function
         alert('An error occurred while adding the expense.');
     }
 });
+<<<<<<< HEAD
+=======
+
+const themeToggleBtn = document.getElementById('themeToggle');
+const currentTheme = localStorage.getItem('theme');
+
+if (currentTheme === 'light') {
+    document.body.classList.add('light-theme');
+    themeToggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
+}
+
+themeToggleBtn.addEventListener('click', () => {
+    document.body.classList.toggle('light-theme');
+    const isLight = document.body.classList.contains('light-theme');
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    themeToggleBtn.innerHTML = isLight ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+});
+>>>>>>> 90d8179 (TOGGLE THEME IN INCOME AND EXPNESE)
