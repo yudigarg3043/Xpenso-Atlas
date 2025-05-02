@@ -3,9 +3,7 @@
     display: flex;
     min-height: 100vh;
 }
-<<<<<<< HEAD
 
-=======
 :root {
     --primary-color: #7c4dff;
     --secondary-color: #b388ff;
@@ -55,7 +53,6 @@ body {
     overflow-x: hidden;
     position: relative;
 }
->>>>>>> 90d8179 (TOGGLE THEME IN INCOME AND EXPNESE)
 /* Sidebar */
 .sidebar {
     width: 250px;
@@ -69,13 +66,10 @@ body {
     border-right: 1px solid #eee;
 }
 
-<<<<<<< HEAD
-=======
 .sidebar .nav-item a{
     color: var(--text-color);
 }
 
->>>>>>> 90d8179 (TOGGLE THEME IN INCOME AND EXPNESE)
 .main-content {
     flex-grow: 1;
     background-color: var(--light-bg);
@@ -157,11 +151,8 @@ body {
 }
 
 .nav-item a:hover {
-<<<<<<< HEAD
     background-color: #f2f2f2;
-=======
     background-color: #8758FF;
->>>>>>> 90d8179 (TOGGLE THEME IN INCOME AND EXPNESE)
     color: #111
 }
 
@@ -171,11 +162,8 @@ body {
 }
 
 .logout-btn {
-<<<<<<< HEAD
     color: white;
-=======
     color: var(--text-color);
->>>>>>> 90d8179 (TOGGLE THEME IN INCOME AND EXPNESE)
     font-weight: 500;
     padding: 12px 15px;
     text-decoration: none;
@@ -187,11 +175,8 @@ body {
 }
 
 .logout-btn:hover {
-<<<<<<< HEAD
     background-color: #f2f2f2;
-=======
     background-color: #8758FF;
->>>>>>> 90d8179 (TOGGLE THEME IN INCOME AND EXPNESE)
     color: #111;
 }
 
@@ -320,11 +305,8 @@ body {
 
 /* Add Expnese  */
 .addexpense {
-<<<<<<< HEAD
     background-color: #1c1f3f;
-=======
     background-color: var(--addexpense-color);
->>>>>>> 90d8179 (TOGGLE THEME IN INCOME AND EXPNESE)
     color: #fff;
     padding: 20px;
     border-radius: 16px;
@@ -349,11 +331,8 @@ body {
 .form-group label {
     margin-bottom: 5px;
     font-weight: 600;
-<<<<<<< HEAD
     color: #ccc;
-=======
     color: var(--text-color);
->>>>>>> 90d8179 (TOGGLE THEME IN INCOME AND EXPNESE)
 }
 
 .form-group input,
@@ -361,13 +340,10 @@ body {
     padding: 10px 12px;
     border-radius: 10px;
     border: none;
-<<<<<<< HEAD
     background-color: #2c2f4f;
     color: #fff;
-=======
     background-color: var(--input-color); 
     color: var(--text-color);
->>>>>>> 90d8179 (TOGGLE THEME IN INCOME AND EXPNESE)
     font-size: 16px;
     transition: all 0.3s ease;
 }
@@ -376,11 +352,8 @@ body {
 .form-group select:focus {
     outline: none;
     box-shadow: 0 0 10px rgba(114, 137, 218, 0.6);
-<<<<<<< HEAD
     background-color: #3b3f6b;
-=======
     background-color: var(--shadow);
->>>>>>> 90d8179 (TOGGLE THEME IN INCOME AND EXPNESE)
 }
 
 button[type="submit"] {

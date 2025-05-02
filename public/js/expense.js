@@ -184,8 +184,6 @@ document.getElementById('expenseForm').addEventListener('submit', async function
         alert('An error occurred while adding the expense.');
     }
 });
-<<<<<<< HEAD
-=======
 
 const themeToggleBtn = document.getElementById('themeToggle');
 const currentTheme = localStorage.getItem('theme');
@@ -201,4 +199,3 @@ themeToggleBtn.addEventListener('click', () => {
     localStorage.setItem('theme', isLight ? 'light' : 'dark');
     themeToggleBtn.innerHTML = isLight ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
 });
->>>>>>> 90d8179 (TOGGLE THEME IN INCOME AND EXPNESE)

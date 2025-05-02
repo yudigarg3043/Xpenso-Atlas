@@ -6,11 +6,7 @@ const allFields = [...inputs, ...textareas];
 const illustrationImg = document.querySelector(".illustration img");
 
 const lightImage = "https://media.istockphoto.com/id/1241789584/vector/customer-service-online-assistant-or-call-center-concept-woman-operator-with-headset.jpg?s=612x612&w=0&k=20&c=KeJInv0bQHil6JpXazAmhYKB-5HYfDpxvrsZxl2AMt8=";
-<<<<<<< HEAD
-const darkImage = "https://sdmntprwestus.oaiusercontent.com/files/00000000-a688-6230-8bcb-5acce1d5539a/raw?se=2025-04-21T13%3A22%3A46Z&sp=r&sv=2024-08-04&sr=b&scid=cf9c3dea-188f-5e23-a264-cd1627f11df6&skoid=e872f19f-7b7f-4feb-9998-20052dec61d6&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-04-20T16%3A33%3A40Z&ske=2025-04-21T16%3A33%3A40Z&sks=b&skv=2024-08-04&sig=kEA2G6LUKZDT3aeYpmel98WL3GUqME2JQ1GpcYR5lgU%3D";
-=======
 const darkImage = "https://img.freepik.com/premium-vector/lady-call-center-illustration-with-headphones-computer-speech-balloon-showing-message-woman-using-laptop-earphones-with-conversation-bubble-presenting-explanation_424947-8749.jpg";
->>>>>>> 90d8179 (TOGGLE THEME IN INCOME AND EXPNESE)
 
 const updateIllustration = (isDark) => {
     illustrationImg.src = isDark ? darkImage : lightImage;
