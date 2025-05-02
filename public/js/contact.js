@@ -4,6 +4,7 @@ const inputs = document.querySelectorAll("input");
 const textareas = document.querySelectorAll("textarea");
 const allFields = [...inputs, ...textareas];
 const illustrationImg = document.querySelector(".illustration img");
+const logoutBtn = document.getElementById('logoutBtn');
 
 const lightImage = "https://media.istockphoto.com/id/1241789584/vector/customer-service-online-assistant-or-call-center-concept-woman-operator-with-headset.jpg?s=612x612&w=0&k=20&c=KeJInv0bQHil6JpXazAmhYKB-5HYfDpxvrsZxl2AMt8=";
 const darkImage = "https://img.freepik.com/premium-vector/lady-call-center-illustration-with-headphones-computer-speech-balloon-showing-message-woman-using-laptop-earphones-with-conversation-bubble-presenting-explanation_424947-8749.jpg";
@@ -11,6 +12,7 @@ const darkImage = "https://img.freepik.com/premium-vector/lady-call-center-illus
 const updateIllustration = (isDark) => {
     illustrationImg.src = isDark ? darkImage : lightImage;
 };
+
 
 const validateForm = (form) => {
     let valid = true;
@@ -75,15 +77,26 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
     updateIllustration(isDark);
+    updateSidebarTheme(isDark);
 });
 
-toggleBtn.addEventListener("click", () => {
-    const isDark = document.body.classList.toggle("dark");
+if (toggleBtn) {
+    toggleBtn.addEventListener("click", () => {
+        const isDark = document.body.classList.toggle("dark");
+        toggleBtn.textContent = isDark ? "☀️" : "🌙";
+        localStorage.setItem("theme", isDark ? "dark" : "light");
+        updateIllustration(isDark);
+        updateSidebarTheme(isDark);
+    });
+}
 
-    toggleBtn.textContent = isDark ? "☀️" : "🌙";
-    localStorage.setItem("theme", isDark ? "dark" : "light");
-    updateIllustration(isDark);
-});
+if (logoutBtn) {
+    logoutBtn.addEventListener('click', () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        window.location.href = '/';
+    });
+}
 
 document.getElementById('contactForm').addEventListener('submit', async function (e) {
     e.preventDefault();

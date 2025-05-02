@@ -123,8 +123,6 @@ async function loadRecentTransaction() {
     }
 }
     loadRecentTransaction();
-
-
 async function loadMonthlySummary() {
     try {
         const res = await fetch('/api/transaction/summary', {

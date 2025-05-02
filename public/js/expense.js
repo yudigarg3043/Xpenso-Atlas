@@ -116,6 +116,46 @@ async function loadRecentTransactions() {
 
 loadRecentTransactions();
 
+async function loadAllExpenses() {
+    try {
+        const res = await fetch('/api/expenses', {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+
+        if (!res.ok) {
+            const errorData = await res.json();
+            throw new Error(errorData.message || 'Failed to fetch transactions.');
+        }
+
+        const expenses = await res.json();
+
+        const modalContent = document.querySelector('.modal-content .transaction-list');
+        modalContent.innerHTML = ''; // Clear previous content
+
+        expenses.forEach(item => {
+            const li = document.createElement('li');
+            li.classList.add('transaction-item');
+            li.innerHTML = `
+                <div class="transaction-icon expense">
+                    <i class="${item.category === 'Food' ? 'fas fa-utensils' : item.category === 'Transport' ? 'fas fa-gas-pump' : item.category === 'Entertainment' ? 'fas fa-face-smile' : item.category === 'Bills' ? 'fas fa-receipt' : item.category === 'Shopping' ? 'fas fa-shopping-cart' : 'fas fa-indian-rupee-sign'}"></i>
+                </div>
+                <div class="transaction-details">
+                    <span class="transaction-title">${item.category}</span>
+                    <span class="transaction-date">${new Date(item.date).toLocaleDateString()}</span>
+                </div>
+                <span class="transaction-amount expense">-₹${item.amount.toFixed(2)}</span>
+            `;
+            modalContent.appendChild(li);
+        });
+    } catch (err) {
+        console.error('Error loading all expenses:', err);
+        alert('Failed to load expenses. Please try again later.');
+    }
+}
+
+document.querySelector('.view-all').addEventListener('click', function () {
+    loadAllExpenses();
+});
 
 
     fetch('/api/expenses/total-per-category', {
@@ -219,4 +259,25 @@ themeToggleBtn.addEventListener('click', () => {
     const isLight = document.body.classList.contains('light-theme');
     localStorage.setItem('theme', isLight ? 'light' : 'dark');
     themeToggleBtn.innerHTML = isLight ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const modal = document.getElementById('transactionModal');
+    const openBtn = document.querySelector('.view-all');
+    const closeBtn = document.getElementById('closeModal');
+
+    openBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        modal.style.display = 'flex'; // Flex for centering
+    });
+
+    closeBtn.addEventListener('click', function () {
+        modal.style.display = 'none';
+    });
+
+    window.addEventListener('click', function (e) {
+        if (e.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
 });

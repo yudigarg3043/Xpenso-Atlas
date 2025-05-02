@@ -116,6 +116,45 @@ async function loadRecentEarnings() {
 
 loadRecentEarnings();
 
+async function loadAllEarnings() {
+    try {
+        const res = await fetch('/api/incomes', {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+
+        if (!res.ok) {
+            const errorData = await res.json();
+            throw new Error(errorData.message || 'Failed to fetch earnings.');
+        }
+
+        const earnings = await res.json();
+
+        const modalContent = document.querySelector('.modal-content .transaction-list');
+        modalContent.innerHTML = ''; // Clear previous content
+
+        earnings.forEach(item => {
+            const li = document.createElement('li');
+            li.classList.add('transaction-item');
+            li.innerHTML = `
+                <div class="transaction-icon income">
+                    <i class="${item.category === 'Salary' ? 'fas fa-money-check' : item.category === 'Stock Investment' ? 'fas fa-money-bill-trend-up' : item.category === 'Mutual Funds' ? 'fas fa-money-bill' : item.category === 'Dividend' ? 'fas fa-coins' : 'fas fa-wallet'}"></i>
+                </div>
+                <div class="transaction-details">
+                    <span class="transaction-title">${item.category}</span>
+                    <span class="transaction-date">${new Date(item.date).toLocaleDateString()}</span>
+                </div>
+                <span class="transaction-amount income">+₹${item.amount.toFixed(2)}</span>
+            `;
+            modalContent.appendChild(li);
+        });
+    } catch (err) {
+        console.error('Error loading all earnings:', err);
+        alert('Failed to load earnings. Please try again later.');
+    }
+}
+document.querySelector('.view-all').addEventListener('click', function () {
+    loadAllEarnings();
+});
 
 
     fetch('/api/incomes/total-per-category', {
@@ -222,4 +261,24 @@ document.getElementById('logoutBtn').addEventListener('click', function() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     window.location.href = '/';
+});
+document.addEventListener('DOMContentLoaded', function () {
+    const modal = document.getElementById('transactionModal');
+    const openBtn = document.querySelector('.view-all');
+    const closeBtn = document.getElementById('closeModal');
+
+    openBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        modal.style.display = 'flex'; // Flex for centering
+    });
+
+    closeBtn.addEventListener('click', function () {
+        modal.style.display = 'none';
+    });
+
+    window.addEventListener('click', function (e) {
+        if (e.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
 });
