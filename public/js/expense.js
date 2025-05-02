@@ -65,36 +65,45 @@ document.addEventListener('DOMContentLoaded', async function () {
         console.error('Error loading chart:', err);
     }
 
-    // 🟢 Fetch and display recent transactions
-    async function loadRecentTransactions() {
-        try {
-            const res = await fetch('/api/expenses/recent', {
-                headers: { 'Authorization': `Bearer ${token}` }
-            });
-            const data = await res.json();
-            const list = document.querySelector('.transaction-list');
-            list.innerHTML = ''; // Clear old
-    
-            data.forEach(item => {
-                const li = document.createElement('li');
-                li.classList.add('transaction-item');
-                li.innerHTML = `
-                    <div class="transaction-icon expense">
-                        <i class="${item.category === 'Food' ? 'fas fa-utensils' : item.category === 'Transport' ? 'fas fa-gas-pump' : item.category === 'Entertainment' ? 'fas fa-face-smile' : item.category === 'Bills' ? 'fas fa-receipt' : item.category === 'Shopping' ? 'fas fa-shopping-cart' : 'fas fa-indian-rupee-sign'}"></i>
-                    </div>
-                    <div class="transaction-details">
-                        <span class="transaction-title">${item.category}</span>
-                        <span class="transaction-date">${new Date(item.date).toLocaleDateString()}</span>
-                    </div>
-                    <span class="transaction-amount expense">-₹${item.amount.toFixed(2)}</span>
-                `;
-                list.appendChild(li);
-            });
-        } catch (err) {
-            console.error('Error loading transactions:', err);
-        }
+// 🟢 Fetch and display recent transactions (Top 5 by date)
+async function loadRecentTransactions() {
+    try {
+        const res = await fetch('/api/expenses/recent', {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        let data = await res.json();
+
+        // Sort by date descending
+        data.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        // Take the first 5
+        const recentFive = data.slice(0, 5);
+
+        const list = document.querySelector('.transaction-list');
+        list.innerHTML = ''; // Clear old list
+
+        recentFive.forEach(item => {
+            const li = document.createElement('li');
+            li.classList.add('transaction-item');
+            li.innerHTML = `
+                <div class="transaction-icon expense">
+                    <i class="${item.category === 'Food' ? 'fas fa-utensils' : item.category === 'Transport' ? 'fas fa-gas-pump' : item.category === 'Entertainment' ? 'fas fa-face-smile' : item.category === 'Bills' ? 'fas fa-receipt' : item.category === 'Shopping' ? 'fas fa-shopping-cart' : 'fas fa-indian-rupee-sign'}"></i>
+                </div>
+                <div class="transaction-details">
+                    <span class="transaction-title">${item.category}</span>
+                    <span class="transaction-date">${new Date(item.date).toLocaleDateString()}</span>
+                </div>
+                <span class="transaction-amount expense">-₹${item.amount.toFixed(2)}</span>
+            `;
+            list.appendChild(li);
+        });
+    } catch (err) {
+        console.error('Error loading transactions:', err);
     }
-    loadRecentTransactions();
+}
+
+loadRecentTransactions();
+
 
 
     fetch('/api/expenses/total-per-category', {
