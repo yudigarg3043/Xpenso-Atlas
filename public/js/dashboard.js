@@ -123,4 +123,48 @@ async function loadRecentTransaction() {
     }
 }
     loadRecentTransaction();
+
+
+async function loadMonthlySummary() {
+    try {
+        const res = await fetch('/api/transaction/summary', {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+
+        const data = await res.json();
+
+        const { totalIncome, totalExpense, savings } = data;
+
+        const incomeElem = document.querySelector('.stat-value.income');
+        const expenseElem = document.querySelector('.stat-value.expenses');
+        const savingsElem = document.querySelector('.stat-value.savings');
+
+        document.querySelector('.stat-value.income').textContent = `₹${totalIncome.toFixed(2)}`;
+        document.querySelector('.stat-value.expenses').textContent = `₹${totalExpense.toFixed(2)}`;
+
+        const savingsChangeElem = document.querySelector('.stat-change.positive, .stat-change.negative');
+        const savingsValueElem = document.querySelector('.stat-value.savings');
+        const savingsLabelElem = document.querySelector('.stat-label.savings');
+
+        const savingsPercentage = ((totalIncome - totalExpense) / totalIncome) * 100;
+
+        if (savings >= 0) {
+            savingsValueElem.textContent = `₹${savings.toFixed(2)}`;
+            savingsChangeElem.textContent = `+${savingsPercentage.toFixed(1)}%`;
+            savingsChangeElem.classList.add('positive');
+        } else {
+            savingsLabelElem.textContent = 'Debt';
+            savingsValueElem.textContent = `₹${Math.abs(savings).toFixed(2)}`;
+            savingsChangeElem.textContent = `${savingsPercentage.toFixed(1)}%`
+            savingsChangeElem.classList.remove('positive');
+            savingsChangeElem.classList.add('negative');
+        }
+
+    } catch (err) {
+        console.error('Error loading monthly summary:', err);
+    }
+}
+
+loadMonthlySummary();
+
 });

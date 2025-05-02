@@ -410,6 +410,47 @@ app.get('/api/incomes/total-per-category', authenticateToken, async (req, res) =
     }
 });
 
+app.get('/api/transaction/summary', authenticateToken, async (req, res) => {
+    try {
+        const userId = req.user.id;
+
+        // Get today's date and subtract 30 days
+        const today = new Date();
+        const lastMonthDate = new Date(today);
+        lastMonthDate.setDate(today.getDate() - 30);
+
+        const transactions = await Transaction.find({
+            userId,
+            date: { $gte: lastMonthDate } // Only last 30 days
+        });
+
+        let totalIncome = 0;
+        let totalExpense = 0;
+
+        transactions.forEach(txn => {
+            if (txn.type === 'income') {
+                totalIncome += txn.amount;
+            } else if (txn.type === 'expense') {
+                totalExpense += txn.amount;
+            }
+        });
+
+        const savings = totalIncome - totalExpense;
+
+        res.json({
+            totalIncome,
+            totalExpense,
+            savings
+        });
+
+    } catch (err) {
+        console.error('Error fetching summary:', err);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
+
+
 // Start server
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
