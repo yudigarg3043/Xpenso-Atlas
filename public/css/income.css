@@ -348,6 +348,11 @@ body {
     transition: all 0.3s ease;
 }
 
+.form-group option {
+    color: var(--text-color);
+    background-color: var(--white);
+}
+
 .form-group input:focus,
 .form-group select:focus {
     outline: none;

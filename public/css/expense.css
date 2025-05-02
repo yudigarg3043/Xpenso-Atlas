@@ -301,6 +301,10 @@ body {
     color: #f44336;
 }
 
+.form-group option {
+    color: var(--text-color);
+    background-color: var(--white);
+}
 
 /* Add Expnese  */
 .addexpense {
