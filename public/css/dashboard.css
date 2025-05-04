@@ -361,72 +361,6 @@
     align-items: center;
 }
 
-
-/* Recent Transactions */
-.transaction-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.transaction-item {
-    display: flex;
-    align-items: center;
-    padding: 0.75rem 0;
-    border-bottom: 1px solid #f0f0f0;
-}
-
-.transaction-item:last-child {
-    border-bottom: none;
-}
-
-.transaction-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 0.75rem;
-}
-
-.transaction-icon.expense {
-    background-color: rgba(244, 67, 54, 0.1);
-    color: #f44336;
-}
-
-.transaction-icon.income {
-    background-color: rgba(76, 175, 80, 0.1);
-    color: var(--success-color);
-}
-
-.transaction-details {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.transaction-title {
-    font-weight: 500;
-}
-
-.transaction-date {
-    font-size: 0.8rem;
-    color: #757575;
-}
-
-.transaction-amount {
-    font-weight: 700;
-}
-
-.transaction-amount.expense {
-    color: #f44336;
-}
-
-.transaction-amount.income {
-    color: var(--success-color);
-}
-
 .view-all {
     margin-top: 1rem;
     width: 100%;
@@ -510,5 +444,5 @@
     justify-content: space-between;
     font-size: 1rem;
     padding: 6px 0;
-    border-bottom: 1px dashed #ddd;
+    border-bottom: 1px solid #ddd;
 }

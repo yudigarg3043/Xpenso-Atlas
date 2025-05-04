@@ -165,33 +165,8 @@ async function loadMonthlySummary() {
 
 loadMonthlySummary();
 
-// //Top 3 Expenses Categories
-// async function TopExpensesCategories(){
-//     const response = await fetch('/api/top-categories', {
-//         headers: {
-//             'Authorization': `Bearer ${token}`
-//         }
-//     });
 
-//     const data = await response.json();
-
-//     const container = document.getElementById('top-categories');
-
-//     if (data.length === 0) {
-//         container.innerHTML = '<p>No spending data available.</p>';
-//     } else {
-//         container.innerHTML = data.map(cat => `
-//             <div class="category-item">
-//                 <span class="category-name">${cat._id}</span>
-//                 <span class="category-amount">$${cat.total.toFixed(2)}</span>
-//             </div>
-//         `).join('');
-//     }
-// }
-
-// TopExpensesCategories();
-
-// LOAD TRANSACTIONS IN POPUP (CODE NOT WORKING CHECK THISS>>>>).....    
+// LOAD TRANSACTIONS IN POPUP   
     const modal = document.getElementById('transactionModal');
     const openBtn = document.querySelector('.view-all');
     const closeBtn = document.getElementById('closeModal');
@@ -268,9 +243,24 @@ loadMonthlySummary();
     
           data.forEach(item => {
             const categoryElement = document.createElement('div');
+            const iconClass = (item._id === 'Food' ? 'fas fa-utensils' : 
+                item._id === 'Transport' ? 'fas fa-gas-pump' : 
+                item._id === 'Entertainment' ? 'fas fa-face-smile' : 
+                item._id === 'Bills' ? 'fas fa-receipt' : 
+                item._id === 'Shopping' ? 'fas fa-shopping-cart' : 
+                'fas fa-indian-rupee-sign');
             categoryElement.className = 'category-item';
+            // categoryElement.innerHTML = `
+            //   <strong>${item._id}</strong>: ₹${item.total.toFixed(2)}
+            // `;
             categoryElement.innerHTML = `
-              <strong>${item._id}</strong>: ₹${item.total.toFixed(2)}
+                <div class="transaction-icon expense">
+                    <i class="${iconClass}"></i>
+                </div>
+                <div class="transaction-details">
+                    <span class="transaction-title">${item._id}</span>
+                </div>
+                <span class="transaction-amount">₹${item.total.toFixed(2)}</span>
             `;
             container.appendChild(categoryElement);
           });
