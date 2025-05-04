@@ -165,31 +165,31 @@ async function loadMonthlySummary() {
 
 loadMonthlySummary();
 
-//Top 3 Expenses Categories
-async function TopExpensesCategories(){
-    const response = await fetch('/api/top-categories', {
-        headers: {
-            'Authorization': `Bearer ${token}`
-        }
-    });
+// //Top 3 Expenses Categories
+// async function TopExpensesCategories(){
+//     const response = await fetch('/api/top-categories', {
+//         headers: {
+//             'Authorization': `Bearer ${token}`
+//         }
+//     });
 
-    const data = await response.json();
+//     const data = await response.json();
 
-    const container = document.getElementById('top-categories');
+//     const container = document.getElementById('top-categories');
 
-    if (data.length === 0) {
-        container.innerHTML = '<p>No spending data available.</p>';
-    } else {
-        container.innerHTML = data.map(cat => `
-            <div class="category-item">
-                <span class="category-name">${cat._id}</span>
-                <span class="category-amount">$${cat.total.toFixed(2)}</span>
-            </div>
-        `).join('');
-    }
-}
+//     if (data.length === 0) {
+//         container.innerHTML = '<p>No spending data available.</p>';
+//     } else {
+//         container.innerHTML = data.map(cat => `
+//             <div class="category-item">
+//                 <span class="category-name">${cat._id}</span>
+//                 <span class="category-amount">$${cat.total.toFixed(2)}</span>
+//             </div>
+//         `).join('');
+//     }
+// }
 
-TopExpensesCategories();
+// TopExpensesCategories();
 
 // LOAD TRANSACTIONS IN POPUP (CODE NOT WORKING CHECK THISS>>>>).....    
     const modal = document.getElementById('transactionModal');
@@ -253,6 +253,35 @@ TopExpensesCategories();
         }
     }
 
+    async function fetchTopCategories() {
+        try {
+          const response = await fetch('/api/top-categories');
+          const data = await response.json();
+    
+          const container = document.getElementById('top-categories');
+          container.innerHTML = ''; // Clear any existing content
+    
+          if (data.length === 0) {
+            container.innerHTML = '<p>No data available.</p>';
+            return;
+          }
+    
+          data.forEach(item => {
+            const categoryElement = document.createElement('div');
+            categoryElement.className = 'category-item';
+            categoryElement.innerHTML = `
+              <strong>${item._id}</strong>: ₹${item.total.toFixed(2)}
+            `;
+            container.appendChild(categoryElement);
+          });
+        } catch (err) {
+          console.error('Error fetching top categories:', err);
+          document.getElementById('top-categories').innerHTML = '<p>Error loading data.</p>';
+        }
+    }
+
+    fetchTopCategories();
+    
     // Open modal and load transactions
     openBtn.addEventListener('click', function (e) {
         e.preventDefault();
