@@ -166,3 +166,86 @@ async function loadMonthlySummary() {
 loadMonthlySummary();
 
 });
+
+
+// LOAD TRANSACTIONS IN POPUP (CODE NOT WORKING CHECK THISS>>>>).....
+
+document.addEventListener('DOMContentLoaded', function () {
+    const modal = document.getElementById('transactionModal');
+    const openBtn = document.querySelector('.view-all');
+    const closeBtn = document.getElementById('closeModal');
+
+    // Function to load all transactions (income and expense)
+    async function loadAllTransactions() {
+        const token = localStorage.getItem('token');
+        try {
+            const res = await fetch('/api/transaction/all', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+
+            if (!res.ok) {
+                throw new Error('Failed to fetch transactions.');
+            }
+
+            const transactions = await res.json();
+
+            const transactionList = document.querySelector('.transaction-list'); // Ensure this container exists in your modal
+            transactionList.innerHTML = ''; // Clear previous content
+
+            transactions.forEach(item => {
+                const li = document.createElement('li');
+                li.classList.add('transaction-item');
+
+                const typeClass = item.type === 'expense' ? 'expense' : 'income';
+                const iconClass = item.type === 'income'
+                    ? (item.category === 'Salary' ? 'fas fa-money-check' :
+                        item.category === 'Stock Investment' ? 'fas fa-money-bill-trend-up' :
+                        item.category === 'Mutual Funds' ? 'fas fa-money-bill' :
+                        item.category === 'Dividend' ? 'fas fa-coins' :
+                        'fas fa-wallet')
+                    : (item.category === 'Food' ? 'fas fa-utensils' :
+                        item.category === 'Transport' ? 'fas fa-gas-pump' :
+                        item.category === 'Entertainment' ? 'fas fa-face-smile' :
+                        item.category === 'Bills' ? 'fas fa-receipt' :
+                        item.category === 'Shopping' ? 'fas fa-shopping-cart' :
+                        'fas fa-indian-rupee-sign');
+
+                const amountPrefix = item.type === 'expense' ? '-' : '+';
+
+                li.innerHTML = `
+                    <div class="transaction-icon ${typeClass}">
+                        <i class="${iconClass}"></i>
+                    </div>
+                    <div class="transaction-details">
+                        <span class="transaction-title">${item.category}</span>
+                        <span class="transaction-date">${new Date(item.date).toLocaleDateString()}</span>
+                    </div>
+                    <span class="transaction-amount ${typeClass}">${amountPrefix}₹${item.amount.toFixed(2)}</span>
+                `;
+                transactionList.appendChild(li);
+            });
+        } catch (err) {
+            console.error('Error loading transactions:', err);
+            alert('Failed to load transactions. Please try again later.');
+        }
+    }
+
+    // Open modal and load transactions
+    openBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        modal.style.display = 'flex'; // Flex for centering
+        loadAllTransactions(); // Load transactions when modal is opened
+    });
+
+    // Close modal
+    closeBtn.addEventListener('click', function () {
+        modal.style.display = 'none';
+    });
+
+    // Close modal when clicking outside of it
+    window.addEventListener('click', function (e) {
+        if (e.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+});

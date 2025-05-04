@@ -130,6 +130,37 @@
                             <a href="#" class="btn btn-outline-primary btn-sm view-all">View All Transactions</a>
                         </div>
                     </div>
+                    <div id="transactionModal" class="modal">
+  <div class="modal-content">
+    <span class="close" id="closeModal">&times;</span>
+                        <div class="card-body">
+                            <h3>All Transactions</h3>
+                            <ul class="transaction-list all-transactions-list">
+                                <li class="transaction-item">
+                                    <div class="transaction-icon expense">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </div>
+                                    <div class="transaction-details">
+                                        <span class="transaction-title">Grocery Shopping</span>
+                                        <span class="transaction-date">Today, 2:30 PM</span>
+                                    </div>
+                                    <span class="transaction-amount expense">-$85.20</span>
+                                </li>
+                                <li class="transaction-item">
+                                    <div class="transaction-icon income">
+                                        <i class="fas fa-money-check"></i>
+                                    </div>
+                                    <div class="transaction-details">
+                                        <span class="transaction-title">Salary Deposit</span>
+                                        <span class="transaction-date">Yesterday</span>
+                                    </div>
+                                    <span class="transaction-amount income">+$2,750.00</span>
+                                </li>
+                                <!-- Add more transactions as needed -->
+                            </ul>
+                        </div>
+  </div>
+</div>
                     <div class="card budget-card">
                         <div class="card-body">
                             <h3>Budget Status</h3>

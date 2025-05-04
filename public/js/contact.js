@@ -1,18 +1,21 @@
 const form = document.querySelector("form");
-const toggleBtn = document.getElementById("toggle-mode");
 const inputs = document.querySelectorAll("input");
 const textareas = document.querySelectorAll("textarea");
 const allFields = [...inputs, ...textareas];
-const illustrationImg = document.querySelector(".illustration img");
 const logoutBtn = document.getElementById('logoutBtn');
 
-const lightImage = "https://media.istockphoto.com/id/1241789584/vector/customer-service-online-assistant-or-call-center-concept-woman-operator-with-headset.jpg?s=612x612&w=0&k=20&c=KeJInv0bQHil6JpXazAmhYKB-5HYfDpxvrsZxl2AMt8=";
-const darkImage = "https://img.freepik.com/premium-vector/lady-call-center-illustration-with-headphones-computer-speech-balloon-showing-message-woman-using-laptop-earphones-with-conversation-bubble-presenting-explanation_424947-8749.jpg";
 
-const updateIllustration = (isDark) => {
-    illustrationImg.src = isDark ? darkImage : lightImage;
-};
+document.addEventListener('DOMContentLoaded', function () {
+    const token = localStorage.getItem('token');
+    const user = JSON.parse(localStorage.getItem('user'));
 
+    if (!token || !user) {
+        window.location.href = '/';
+        return;
+    }
+
+    document.getElementById('userName').textContent = user.fullName;
+});
 
 const validateForm = (form) => {
     let valid = true;
@@ -31,7 +34,7 @@ const validateForm = (form) => {
         valid = false;
     }
 
-    const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    const emailRegex = /^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/;
     if (!emailRegex.test(email.value.trim())) {
         giveError(email, "Please enter a valid email");
         valid = false;
@@ -64,31 +67,6 @@ const removeError = (field) => {
 allFields.forEach((field) => {
     field.addEventListener("input", () => removeError(field));
 });
-
-window.addEventListener("DOMContentLoaded", () => {
-    const savedTheme = localStorage.getItem("theme");
-    const isDark = savedTheme === "dark";
-
-    if (isDark) {
-        document.body.classList.add("dark");
-        toggleBtn.textContent = "☀️";
-    } else {
-        toggleBtn.textContent = "🌙";
-    }
-
-    updateIllustration(isDark);
-    updateSidebarTheme(isDark);
-});
-
-if (toggleBtn) {
-    toggleBtn.addEventListener("click", () => {
-        const isDark = document.body.classList.toggle("dark");
-        toggleBtn.textContent = isDark ? "☀️" : "🌙";
-        localStorage.setItem("theme", isDark ? "dark" : "light");
-        updateIllustration(isDark);
-        updateSidebarTheme(isDark);
-    });
-}
 
 if (logoutBtn) {
     logoutBtn.addEventListener('click', () => {

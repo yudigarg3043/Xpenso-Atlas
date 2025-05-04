@@ -158,7 +158,7 @@ body {
     display: flex;
     gap: 80px;
     border-radius: 10px;
-    background-color: var(--white-color);
+    background-color: #1a1a2e;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     transition: background-color 0.6s;
     margin-left: 400px;
@@ -166,6 +166,10 @@ body {
 
 .left {
     width: 57%;
+}
+
+.left p{
+    color: white;
 }
 
 .heading {
@@ -198,16 +202,15 @@ form {
     border: none;
     outline: none;
     margin-bottom: 3px;
-    background-color: var(--secondary-color);
-    color: var(--text-color);
+    background-color: #2c2f4f;
+    color: white;
     transition: background-color 0.6s, color 0.6s;
 }
 
 .inputBox input::placeholder,
 .inputBox textarea::placeholder {
     font-size: 12px;
-    color: var(--text-color);
-    opacity: 0.5;
+    color: white;
 }
 
 .inputBox.error input,
@@ -290,7 +293,7 @@ form {
 
 .infoBox .text a {
     text-decoration: none;
-    color: var(--text-color);
+    color: white;
 }
 
 .social-icons {
@@ -312,63 +315,6 @@ form {
 .social-icons a {
     color: var(--white-color);
     text-decoration: none;
-}
-
-.toggle-wrapper {
-    position: relative;
-}
-
-.toggle-btn {
-    position: absolute;
-    top: -20px;
-    right: -20px;
-    background: var(--primary-color);
-    color: var(--white-color);
-    border: none;
-    border-radius: 50%;
-    padding: 10px;
-    font-size: 18px;
-    cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-}
-
-/* Dark Theme */
-body.dark {
-    background-color: #1e1e1e;
-}
-
-body.dark .container {
-    background-color: #1a1a2e;
-}
-
-body.dark .heading,
-body.dark .text,
-body.dark .infoBox .text a {
-    color: #fff;
-}
-
-body.dark .inputBox input,
-body.dark .inputBox textarea {
-    background-color: #2c2f4f;
-    color: #fff;
-}
-
-body.dark .inputBox input::placeholder,
-body.dark .inputBox textarea::placeholder {
-    color: #ccc;
-}
-
-body.dark .submit-btn {
-    background-color: #8c52ff;
-}
-
-body.dark .submit-btn:hover {
-    background-color: #6e3fc4;
-}
-
-body.dark .infoBox .icon {
-    color: var(--primary-color);
-    border-color: var(--primary-color);
 }
 
 @media (max-width: 768px) {
