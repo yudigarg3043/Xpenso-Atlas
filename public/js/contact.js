@@ -110,3 +110,29 @@ document.getElementById('contactForm').addEventListener('submit', async function
         alert('An error occurred while sending the message.');
     }
 });
+document.addEventListener('DOMContentLoaded', function () {
+    const themeToggleBtn = document.getElementById('themeToggle');
+    const illustrationImg = document.getElementById('illustration-img');
+    const currentTheme = localStorage.getItem('theme');
+
+    // Apply the saved theme and update the icon color on page load
+    if (currentTheme === 'light') {
+        document.body.classList.add('light-theme');
+        themeToggleBtn.innerHTML = '<i class="fas fa-moon" style="color: black;"></i>';
+        illustrationImg.src = 'https://img.freepik.com/free-vector/contact-us-concept-illustration_114360-3147.jpg';
+    }
+
+    // Toggle theme and update the icon color
+    themeToggleBtn.addEventListener('click', () => {
+        document.body.classList.toggle('light-theme');
+        if (document.body.classList.contains('light-theme')) {
+            themeToggleBtn.innerHTML = '<i class="fas fa-moon" style="color: black;"></i>';
+            illustrationImg.src = 'https://img.freepik.com/free-vector/contact-us-concept-illustration_114360-3147.jpg';
+            localStorage.setItem('theme', 'light');
+        } else {
+            themeToggleBtn.innerHTML = '<i class="fas fa-sun" style="color: white;"></i>';
+            illustrationImg.src = 'https://img.freepik.com/premium-vector/lady-call-center-illustration-with-headphones-computer-speech-balloon-showing-message-woman-using-laptop-earphones-with-conversation-bubble-presenting-explanation_424947-8749.jpg';
+            localStorage.setItem('theme', 'dark');
+        }
+    });
+});

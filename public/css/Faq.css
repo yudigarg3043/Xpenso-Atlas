@@ -348,7 +348,7 @@ body.light-theme h2 {
 }
 
 body.light-theme .faq-section details {
-    background-color: #f0f0f5;
+    background-color: #ededed;
     border-color: #ddd;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }

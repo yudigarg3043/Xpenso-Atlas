@@ -92,6 +92,7 @@ body {
 }
 
 .user-name {
+    color: white;
     font-weight: 600;
     font-size: 16px;
 }
@@ -183,6 +184,14 @@ body {
     color: var(--text-color);
     margin-top: 10px;
     font-weight: 550;
+}
+
+.infoBox .text a{
+    cursor: pointer;
+}
+
+.infoBox .text a:hover {
+    color: var(--primary-color);
 }
 
 form {
@@ -279,6 +288,7 @@ form {
     gap: 10px;
 }
 
+
 .infoBox .icon {
     width: 40px;
     height: 40px;
@@ -345,4 +355,104 @@ form {
         justify-content: space-between;
         border-radius: 0;
     }
+}
+
+/* Theme Toggle Button */
+.theme-toggle-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    border-radius: 50%;
+    color: #fff;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+body.light-theme {
+    background-color: #ffffff !important; /* Force the background to white */
+    color: #000000; /* Ensure text color is black */
+}
+
+body.light-theme .left p {
+    color: #000000;
+}
+
+body.light-theme .container {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+body.light-theme .inputBox input::placeholder,
+body.light-theme .inputBox textarea::placeholder {
+    color: #000000;
+}
+
+
+body.light-theme .inputBox input,
+body.light-theme .inputBox textarea {
+    background-color: #ededed;
+    color: #000000;
+}
+
+body.light-theme .infoBox .text a{
+    font-weight: 500;
+    color: #000000;
+}
+
+body.light-theme .submit-btn {
+    background-color: #6369f5;
+    color: #ffffff;
+}
+
+body.light-theme .infoBox .icon {
+    color: #6369f5;
+    border-color: #6369f5;
+}
+
+body.light-theme .infoBox .text a:hover {
+    color: #6369f5;
+}
+
+body.light-theme .social-icons {
+    background-color: #f5f5f5;
+    color: black;
+}
+
+body.light-theme .sidebar {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+body.light-theme .sidebar .nav-item a {
+    color: #000000;
+}
+
+body.light-theme .sidebar .nav-item.active a {
+    background-color: #6369f5;
+    color: #ffffff;
+}
+
+body.light-theme .sidebar .nav-item a:hover {
+    background-color: #6369f5;
+    color: #ffffff;
+}
+
+body.light-theme .sidebar .logout-btn {
+    color: black;
+}
+
+body.light-theme .sidebar .logout-btn:hover {
+    background-color: #6369f5;
+    color: #ffffff;
+}
+
+body.light-theme .user-name {
+    color: #000000;
 }

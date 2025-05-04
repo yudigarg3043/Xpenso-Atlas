@@ -44,10 +44,7 @@ body::before {
 }
 
 /* === Light Theme Base === */
-body.light-theme {
-    background-color: #f2f3fa;
-    color: #212529;
-}
+
 
 /* === Form Container === */
 body.light-theme .form-container {
@@ -119,13 +116,12 @@ body.light-theme a:hover {
     color: #7e57c2; /* Darker purple when hovered */
 }
 
-/* === Logo === */
-body.light-theme .logo {
-    color: #9c4dcc; /* Brighter purple for logo */
+/* body.light-theme .logo {
+    color: #9c4dcc;
     font-weight: bold;
     font-size: 2.5rem;
     margin-bottom: 1.5rem;
-}
+} */
 
 /* === Sign Up / Login Links === */
 body.light-theme #showSignup,
@@ -381,4 +377,9 @@ p {
     .social-login {
         flex-direction: column;
     }
+}
+body.light-theme {
+    background: none !important;
+    background-color: #ffffff !important;
+    color: #000000 !important;
 }
