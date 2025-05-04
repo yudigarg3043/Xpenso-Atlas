@@ -165,21 +165,41 @@ async function loadMonthlySummary() {
 
 loadMonthlySummary();
 
-});
+//Top 3 Expenses Categories
+async function TopExpensesCategories(){
+    const response = await fetch('/api/top-categories', {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    });
 
+    const data = await response.json();
 
-// LOAD TRANSACTIONS IN POPUP (CODE NOT WORKING CHECK THISS>>>>).....
+    const container = document.getElementById('top-categories');
 
-document.addEventListener('DOMContentLoaded', function () {
+    if (data.length === 0) {
+        container.innerHTML = '<p>No spending data available.</p>';
+    } else {
+        container.innerHTML = data.map(cat => `
+            <div class="category-item">
+                <span class="category-name">${cat._id}</span>
+                <span class="category-amount">$${cat.total.toFixed(2)}</span>
+            </div>
+        `).join('');
+    }
+}
+
+TopExpensesCategories();
+
+// LOAD TRANSACTIONS IN POPUP (CODE NOT WORKING CHECK THISS>>>>).....    
     const modal = document.getElementById('transactionModal');
     const openBtn = document.querySelector('.view-all');
     const closeBtn = document.getElementById('closeModal');
 
     // Function to load all transactions (income and expense)
     async function loadAllTransactions() {
-        const token = localStorage.getItem('token');
         try {
-            const res = await fetch('/api/transaction/all', {
+            const res = await fetch('/api/transaction/recent', {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
 
@@ -189,7 +209,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const transactions = await res.json();
 
-            const transactionList = document.querySelector('.transaction-list'); // Ensure this container exists in your modal
+            // Sort by date descending
+            transactions.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            const transactionList = document.querySelector('.all-transactions-list'); // Ensure this container exists in your modal
             transactionList.innerHTML = ''; // Clear previous content
 
             transactions.forEach(item => {
@@ -248,4 +271,5 @@ document.addEventListener('DOMContentLoaded', function () {
             modal.style.display = 'none';
         }
     });
+
 });

@@ -450,6 +450,41 @@ app.get('/api/transaction/summary', authenticateToken, async (req, res) => {
 });
 
 
+app.get('/api/top-categories', authenticateToken, async (req, res) => {
+    try {
+        const userId = req.user._id; // assuming authentication middleware sets this
+        const oneMonthAgo = new Date();
+        oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+
+        const topCategories = await Transaction.aggregate([
+            {
+                $match: {
+                    userId,
+                    type: 'expense',
+                    date: { $gte: oneMonthAgo }
+                }
+            },
+            {
+                $group: {
+                    _id: '$category',
+                    total: { $sum: '$amount' }
+                }
+            },
+            {
+                $sort: { total: -1 }
+            },
+            {
+                $limit: 3
+            }
+        ]);
+
+        res.json(topCategories);
+    } catch (error) {
+        console.error('Error fetching top categories:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
 
 // Start server
 app.listen(PORT, () => {

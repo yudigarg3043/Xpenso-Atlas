@@ -176,8 +176,8 @@ document.querySelector('.view-all').addEventListener('click', function () {
                 const { category, spent, total, percentage } = item;
 
                 const percentValue = parseFloat(percentage);
-                const progressClass = percentValue < 70 ? 'bg-danger' :
-                                      percentValue < 90 ? 'bg-warning' : 'bg-success' ;
+                const progressClass = percentValue < 70 ? 'bg-success' :
+                                      percentValue < 90 ? 'bg-warning' : 'bg-danger' ;
 
                 const budgetItemHTML = `
                     <div class="budget-item mb-3">

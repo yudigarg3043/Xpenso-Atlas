@@ -131,64 +131,42 @@
                         </div>
                     </div>
                     <div id="transactionModal" class="modal">
-  <div class="modal-content">
-    <span class="close" id="closeModal">&times;</span>
-                        <div class="card-body">
-                            <h3>All Transactions</h3>
-                            <ul class="transaction-list all-transactions-list">
-                                <li class="transaction-item">
-                                    <div class="transaction-icon expense">
-                                        <i class="fas fa-shopping-cart"></i>
-                                    </div>
-                                    <div class="transaction-details">
-                                        <span class="transaction-title">Grocery Shopping</span>
-                                        <span class="transaction-date">Today, 2:30 PM</span>
-                                    </div>
-                                    <span class="transaction-amount expense">-$85.20</span>
-                                </li>
-                                <li class="transaction-item">
-                                    <div class="transaction-icon income">
-                                        <i class="fas fa-money-check"></i>
-                                    </div>
-                                    <div class="transaction-details">
-                                        <span class="transaction-title">Salary Deposit</span>
-                                        <span class="transaction-date">Yesterday</span>
-                                    </div>
-                                    <span class="transaction-amount income">+$2,750.00</span>
-                                </li>
-                                <!-- Add more transactions as needed -->
-                            </ul>
+                        <div class="modal-content">
+                            <span class="close" id="closeModal">&times;</span>
+                            <div class="card-body">
+                                <h3>All Transactions</h3>
+                                <ul class="transaction-list all-transactions-list">
+                                    <li class="transaction-item">
+                                        <div class="transaction-icon expense">
+                                            <i class="fas fa-shopping-cart"></i>
+                                        </div>
+                                        <div class="transaction-details">
+                                            <span class="transaction-title">Grocery Shopping</span>
+                                            <span class="transaction-date">Today, 2:30 PM</span>
+                                        </div>
+                                        <span class="transaction-amount expense">-$85.20</span>
+                                    </li>
+                                    <li class="transaction-item">
+                                        <div class="transaction-icon income">
+                                            <i class="fas fa-money-check"></i>
+                                        </div>
+                                        <div class="transaction-details">
+                                            <span class="transaction-title">Salary Deposit</span>
+                                            <span class="transaction-date">Yesterday</span>
+                                        </div>
+                                        <span class="transaction-amount income">+$2,750.00</span>
+                                    </li>
+                                    <!-- Add more transactions as needed -->
+                                </ul>
+                            </div>
                         </div>
-  </div>
-</div>
+                    </div>
                     <div class="card budget-card">
-                        <div class="card-body">
-                            <h3>Budget Status</h3>
-                            <div class="budget-item">
-                                <div class="budget-info">
-                                    <span class="budget-category">Food & Groceries</span>
-                                    <span class="budget-progress">$420/$500</span>
-                                </div>
-                                <div class="progress">
-                                    <div class="progress-bar bg-success" role="progressbar" style="width: 84%"></div>
-                                </div>
-                            </div>
-                            <div class="budget-item">
-                                <div class="budget-info">
-                                    <span class="budget-category">Transportation</span>
-                                    <span class="budget-progress">$280/$300</span>
-                                </div>
-                                <div class="progress">
-                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 93%"></div>
-                                </div>
-                            </div>
-                            <div class="budget-item">
-                                <div class="budget-info">
-                                    <span class="budget-category">Entertainment</span>
-                                    <span class="budget-progress">$150/$200</span>
-                                </div>
-                                <div class="progress">
-                                    <div class="progress-bar bg-info" role="progressbar" style="width: 75%"></div>
+                        <div class="card top-categories-card">
+                            <div class="card-body">
+                                <h3>Top 3 Spending Categories (Past Month)</h3>
+                                <div id="top-categories" class="top-categories-list">
+                                    <!-- Data populated by JS -->
                                 </div>
                             </div>
                         </div>
