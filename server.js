@@ -237,6 +237,9 @@ app.get('/', (req, res) => {
   app.get('/income', (req,res) => {
     res.render('income');
   })
+  app.get('/Faq',(req,res)=>{
+  res.render('Faq');
+  });
 
 
   app.get('/api/expenses', authenticateToken, async (req, res) => {

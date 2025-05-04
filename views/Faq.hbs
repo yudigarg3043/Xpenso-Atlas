@@ -1,0 +1,92 @@
+{{!-- views/contact.hbs --}}
+{{! Page-specific CSS --}}
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/Faq.css" />
+<link rel="stylesheet" href="https://unpkg.com/ionicons@5.5.2/dist/css/ionicons.min.css">
+<div class="sidebar">
+        <div class="logo-container text-center py-3">
+            <h2 class="logo">Xpenso</h2>
+        </div>
+        <div class="text-center my-3">
+            <img src="https://cdn-icons-png.flaticon.com/512/4140/4140037.png" alt="Avatar" class="avatar-img mb-2">
+            <h5 class="user-name" id="userName">User Name</h5>
+        </div>
+        <ul class="nav-menu px-3">
+            <li class="nav-item">
+                <a href="/dashboard"><i class="fas fa-th-large"></i> Dashboard</a>
+            </li>
+            <li class="nav-item ">
+                <a href="/contact"><i class="fas fa-wallet"></i> Support</a>
+            </li>
+            <li class="nav-item active">
+                <a href="/Faq"><i class="fas fa-money-check-alt"></i> Faq's</a>
+            </li>
+            <li class="nav-item">
+                <a href="/privacy"><i class="fas fa-headset"></i> Privacy Policy</a>
+            </li>
+        </ul>
+        <div class="logout-container mt-auto px-3">
+            <button id="logoutBtn" class="btn btn-link logout-btn text-start">
+                <a><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </button>
+        </div>
+    </div>
+
+<main>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+
+        <header>
+            <h2 align="center">Frequently Asked Questions</h2>
+        </header>
+
+        <section class="faq-section mb-3">
+            <details>
+                <summary> What is Xpenso?</summary>
+                <p>Xpenso is a personal finance tracker that helps you record, categorize, and monitor your income and expenses in one place.
+                </p>
+            </details>
+            
+            <details>
+                <summary>How do I add an income entry?</summary>
+                <p>Click the "Add Income" button, fill in the amount, source, and date, then save it. Your income will be reflected in your total balance immediately.</p>
+            </details>
+
+            <details>
+                <summary>How do I record an expense?</summary>
+                <p>Click on "Add Expense," input the amount, category (e.g., food, bills), date, and optional notes, then hit save.</p>
+            </details>
+
+           
+            <details>
+                <summary>Can I categorize my transactions?</summary>
+                <p>Yes, you can assign categories like "Groceries", "Transport", "Salary", or create custom categories to better organize your finances.</p>
+            </details>
+
+            <details>
+                <summary>How do I view my monthly spending?</summary>
+                <p>Go to the Dashboard section where you can find charts and summaries of your income vs. expenses for the selected month.</p>
+            </details>
+
+            <details>
+                <summary> Can I track income and expenses in different currencies?</summary>
+                <p>Currently, Xpenso supports your local currency. Multi-currency support is planned for a future update.</p>
+            </details>
+
+            <details>
+                <summary> Is there a mobile version of Xpenso</summary>
+                <p>Yes! Xpenso is fully responsive and works on mobile browsers. A native app is also in development</p>
+            </details>
+
+        </section>
+
+
+<div class="theme-toggle">
+    <button id="themeSwitcher" class="theme-btn">
+        <i id="themeIcon" class="fas fa-moon"></i>
+    </button>
+</div>
+
+
+    </main>
+    <script src="/js/Faq.js"></script>
