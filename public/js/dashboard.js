@@ -34,40 +34,135 @@ document.addEventListener('DOMContentLoaded', function() {
         localStorage.removeItem('user');
         window.location.href = '/';
     });
-    
-    const ctx = document.getElementById('expenseChart').getContext('2d');
-    const expenseChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            labels: ['Food & Groceries', 'Transportation', 'Entertainment', 'Utilities', 'Shopping', 'Others'],
-            datasets: [{
-                data: [420, 280, 150, 180, 320, 190],
-                backgroundColor: [
-                    '#4caf50',
-                    '#ff9800',
-                    '#2196f3',
-                    '#9c27b0',
-                    '#f44336',
-                    '#607d8b'
-                ],
-                borderWidth: 0
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: true,
-            plugins: {
-                legend: {
-                    position: 'bottom',
-                    labels: {
-                        padding: 20,
-                        boxWidth: 12
-                    }
+
+    // 🟢 Fetch expenses and render the doughnut chart
+    async function loadExpChart(){
+        try {
+            const res = await fetch('/api/expenses', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
                 }
-            },
-            cutout: '70%'
+            });
+    
+            const expenses = await res.json();
+    
+            const categoryTotals = {};
+            expenses.forEach(exp => {
+                const category = exp.category;
+                if (!categoryTotals[category]) {
+                    categoryTotals[category] = 0;
+                }
+                categoryTotals[category] += exp.amount;
+            });
+    
+            const labels = Object.keys(categoryTotals);
+            const data = Object.values(categoryTotals);
+    
+            const colors = labels.map((_, i) => `hsl(${(i * 60) % 360}, 70%, 60%)`);
+    
+            const ctx = document.getElementById('expenseChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: colors,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                            responsive: true,
+                            maintainAspectRatio: true,
+                            plugins: {
+                                title: {
+                                    display: true,
+                                    position: 'bottom',
+                                    text: 'Expenses By Category'
+                                },
+                                legend: {
+                                    position: 'bottom',
+                                    labels: {
+                                        padding: 20,
+                                        boxWidth: 12
+                                    }
+                                }
+                            },
+                            cutout: '70%'
+                        }
+            });
+        } catch (err) {
+            console.error('Error loading chart:', err);
         }
-    });
+    }
+    loadExpChart();
+
+    // 🟢 Fetch earnings and render the doughnut chart
+    async function loadIncChart(){
+        try {
+            const res = await fetch('/api/incomes', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+    
+            const earnings = await res.json();
+    
+            const categoryTotals = {};
+            earnings.forEach(exp => {
+                const category = exp.category;
+                if (!categoryTotals[category]) {
+                    categoryTotals[category] = 0;
+                }
+                categoryTotals[category] += exp.amount;
+            });
+    
+            const labels = Object.keys(categoryTotals);
+            const data = Object.values(categoryTotals);
+    
+            const ctx = document.getElementById('incomeChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: [
+                            '#4caf50',
+                            '#ff9800',
+                            '#2196f3',
+                            '#9c27b0',
+                            '#f44336',
+                            '#607d8b'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                            responsive: true,
+                            maintainAspectRatio: true,
+                            plugins: {
+                                title: {
+                                    display: true,
+                                    position: 'bottom',
+                                    text: 'Earnings By Category'
+                                },
+                                legend: {
+                                    position: 'bottom',
+                                    labels: {
+                                        padding: 20,
+                                        boxWidth: 12
+                                    }
+                                }
+                            },
+                            cutout: '70%'
+                        }
+            });
+        } catch (err) {
+            console.error('Error loading chart:', err);
+        }
+    }
+    loadIncChart();
     
     // 🟢 Fetch and display recent Transactions (Top 5 by date)
 async function loadRecentTransaction() {

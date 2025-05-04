@@ -53,24 +53,42 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         const colors = labels.map((_, i) => `hsl(${(i * 60) % 360}, 70%, 60%)`);
 
-        const ctx = document.getElementById('expenseChart').getContext('2d');
+        const ctx = document.getElementById('incomeChart').getContext('2d');
         new Chart(ctx, {
             type: 'doughnut',
             data: {
                 labels: labels,
                 datasets: [{
                     data: data,
-                    backgroundColor: colors,
+                    backgroundColor: [
+                        '#4caf50',
+                        '#ff9800',
+                        '#2196f3',
+                        '#9c27b0',
+                        '#f44336',
+                        '#607d8b'
+                    ],
                     borderWidth: 1
                 }]
             },
             options: {
+                responsive: true,
+                maintainAspectRatio: true,
                 plugins: {
                     title: {
                         display: true,
-                        text: 'Earnings by Category'
+                        position: 'bottom',
+                        text: 'Earnings By Category'
+                    },
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 20,
+                            boxWidth: 12
+                        }
                     }
-                }
+                },
+                cutout: '70%'
             }
         });
     } catch (err) {

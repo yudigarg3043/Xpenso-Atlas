@@ -79,6 +79,13 @@
                             <canvas id="expenseChart"></canvas>
                         </div>
                     </div>
+
+                    <div class="card chart-card">
+                        <div class="card-body">
+                            <h3>Earnings Breakdown</h3>
+                            <canvas id="incomeChart"></canvas>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="col-md-4">
@@ -86,46 +93,7 @@
                         <div class="card-body">
                             <h3>Recent Transactions</h3>
                             <ul class="transaction-list">
-                                <li class="transaction-item">
-                                    <div class="transaction-icon expense">
-                                        <i class="fas fa-shopping-cart"></i>
-                                    </div>
-                                    <div class="transaction-details">
-                                        <span class="transaction-title">Grocery Shopping</span>
-                                        <span class="transaction-date">Today, 2:30 PM</span>
-                                    </div>
-                                    <span class="transaction-amount expense">-$85.20</span>
-                                </li>
-                                <li class="transaction-item">
-                                    <div class="transaction-icon income">
-                                        <i class="fas fa-money-check"></i>
-                                    </div>
-                                    <div class="transaction-details">
-                                        <span class="transaction-title">Salary Deposit</span>
-                                        <span class="transaction-date">Yesterday</span>
-                                    </div>
-                                    <span class="transaction-amount income">+$2,750.00</span>
-                                </li>
-                                <li class="transaction-item">
-                                    <div class="transaction-icon expense">
-                                        <i class="fas fa-utensils"></i>
-                                    </div>
-                                    <div class="transaction-details">
-                                        <span class="transaction-title">Restaurant</span>
-                                        <span class="transaction-date">Mar 20, 2025</span>
-                                    </div>
-                                    <span class="transaction-amount expense">-$42.50</span>
-                                </li>
-                                <li class="transaction-item">
-                                    <div class="transaction-icon expense">
-                                        <i class="fas fa-gas-pump"></i>
-                                    </div>
-                                    <div class="transaction-details">
-                                        <span class="transaction-title">Fuel</span>
-                                        <span class="transaction-date">Mar 18, 2025</span>
-                                    </div>
-                                    <span class="transaction-amount expense">-$65.75</span>
-                                </li>
+                                {{!-- Adding Recent Transaction thorugh JS function --}}
                             </ul>
                             <a href="#" class="btn btn-outline-primary btn-sm view-all">View All Transactions</a>
                         </div>
@@ -136,27 +104,7 @@
                             <div class="card-body">
                                 <h3>All Transactions</h3>
                                 <ul class="transaction-list all-transactions-list">
-                                    <li class="transaction-item">
-                                        <div class="transaction-icon expense">
-                                            <i class="fas fa-shopping-cart"></i>
-                                        </div>
-                                        <div class="transaction-details">
-                                            <span class="transaction-title">Grocery Shopping</span>
-                                            <span class="transaction-date">Today, 2:30 PM</span>
-                                        </div>
-                                        <span class="transaction-amount expense">-$85.20</span>
-                                    </li>
-                                    <li class="transaction-item">
-                                        <div class="transaction-icon income">
-                                            <i class="fas fa-money-check"></i>
-                                        </div>
-                                        <div class="transaction-details">
-                                            <span class="transaction-title">Salary Deposit</span>
-                                            <span class="transaction-date">Yesterday</span>
-                                        </div>
-                                        <span class="transaction-amount income">+$2,750.00</span>
-                                    </li>
-                                    <!-- Add more transactions as needed -->
+                                    {{!-- Adding All Transactions through Js function --}}
                                 </ul>
                             </div>
                         </div>
