@@ -153,7 +153,7 @@ async function loadAllExpenses() {
     }
 }
 
-document.querySelector('.view-all').addEventListener('click', function () {
+document.querySelector('.modal-open').addEventListener('click', function () {
     loadAllExpenses();
 });
 
@@ -287,7 +287,7 @@ themeToggleBtn.addEventListener('click', () => {
 
 document.addEventListener('DOMContentLoaded', function () {
     const modal = document.getElementById('transactionModal');
-    const openBtn = document.querySelector('.view-all');
+    const openBtn = document.querySelector('.modal-open');
     const closeBtn = document.getElementById('closeModal');
 
     openBtn.addEventListener('click', function (e) {
