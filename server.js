@@ -576,6 +576,58 @@ app.get('/api/incomes/export/excel', async (req, res) => {
 });
 
 
+app.get('/api/transaction/export/excel', async (req, res) => {
+    try {
+        const transaction = await Transaction.find();
+
+        // Convert to a JSON array suitable for Excel
+        const data = transaction.map(inc => ({
+            Date: new Date(inc.date).toLocaleDateString(),
+            type: inc.type,
+            Description: inc.description || '',
+            Category: inc.category,
+            Amount: inc.amount
+        }));
+
+        // // Calculate total
+        // const totalAmount = data.reduce((sum, inc) => sum + inc.Amount, 0);
+
+        // // Add empty row + total row at the end
+        // data.push({}, {
+        //     Date: 'Total',
+        //     Amount: totalAmount
+        // });
+
+        // Add header row manually: this will be row 1
+        const headers = [["All Transactions"], ["Date", "Type", "Description", "Category", "Amount"]];
+        const worksheet = XLSX.utils.aoa_to_sheet(headers);
+
+        // Append data rows starting from row 3
+        XLSX.utils.sheet_add_json(worksheet, data, { origin: -1, skipHeader: true });
+
+        // Merge first row across 4 columns (A1:D1)
+        worksheet['!merges'] = [{ s: { r: 0, c: 0 }, e: { r: 0, c: 4 } }];
+
+        // Optionally center the merged cell text (requires direct cell styling)
+        worksheet['A1'].s = {
+            alignment: { horizontal: "center", vertical: "center" },
+            font: { bold: true, sz: 14 }
+        };
+
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'All Transactions');
+
+        const buffer = XLSX.write(workbook, { type: 'buffer', bookType: 'xlsx' });
+
+        res.setHeader('Content-Disposition', 'attachment; filename="expenses.xlsx"');
+        res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        res.send(buffer);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error generating Excel file');
+    }
+});
+
 // Start server
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
