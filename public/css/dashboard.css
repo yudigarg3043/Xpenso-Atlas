@@ -446,3 +446,83 @@
     padding: 6px 0;
     border-bottom: 1px solid #ddd;
 }
+
+.theme-toggle {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    border-radius: 50%;
+    color: #fff;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+body.light-theme {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+body.light-theme .sidebar {
+    background-color: #f5f5f5;
+    color: #000000;
+}
+
+body.light-theme .nav-item a {
+    color: #000000;
+}
+
+body.light-theme .nav-item a:hover {
+    background-color: #8758FF;
+    color: #000000;
+}
+
+body.light-theme .nav-item.active a {
+    background-color: #8758FF;
+    color: white;
+}
+
+body.light-theme .main-content {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+body.light-theme .card {
+    background-color: #f5f5f5;
+    color: #000000;
+}
+
+body.light-theme .transaction-item {
+    border-bottom: 1px solid #ddd;
+}
+
+body.light-theme .transaction-icon.expense {
+    background-color: rgba(244, 67, 54, 0.1);
+    color: #f44336;
+}
+
+body.light-theme .transaction-icon.income {
+    background-color: rgba(76, 175, 80, 0.1);
+    color: #4caf50;
+}
+
+body.light-theme .modal-content {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+body.light-theme .logout-btn {
+    color: #000000;
+}
+
+body.light-theme .stat-item {
+    background-color: #ededed;
+    color: #000000;
+}
+
+body.light-theme .logout-btn:hover {
+    background-color: #8758FF;
+    color: #000000;
+}
+body.light-theme .theme-toggle i {
+    color: black;
+}

@@ -387,3 +387,24 @@ loadMonthlySummary();
     });
 
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const themeToggleBtn = document.getElementById('themeToggle');
+    const currentTheme = localStorage.getItem('theme');
+
+    // Apply the saved theme on page load
+    if (currentTheme === 'light') {
+        document.body.classList.add('light-theme');
+        themeToggleBtn.innerHTML = '<i class="fas fa-moon" style="color: black;"></i>';
+    }
+
+    // Toggle theme on button click
+    themeToggleBtn.addEventListener('click', () => {
+        document.body.classList.toggle('light-theme');
+        const isLight = document.body.classList.contains('light-theme');
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        themeToggleBtn.innerHTML = isLight
+            ? '<i class="fas fa-moon" style="color: black;"></i>'
+            : '<i class="fas fa-sun" style="color: white;"></i>';
+    });
+});

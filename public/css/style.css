@@ -112,8 +112,8 @@ body.light-theme a {
 }
 
 body.light-theme a:hover {
-    text-decoration: underline;
-    color: #7e57c2; /* Darker purple when hovered */
+    /* text-decoration: underline; */
+    color: black; /* Darker purple when hovered */
 }
 
 /* body.light-theme .logo {

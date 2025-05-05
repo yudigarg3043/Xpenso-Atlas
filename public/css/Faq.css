@@ -336,7 +336,7 @@ body.light-theme .nav-item a {
 body.light-theme .nav-item.active a,
 body.light-theme .nav-item a:hover {
     background-color: #8758FF;
-    color: #000;
+    color: black;
 }
 
 body.light-theme main {
