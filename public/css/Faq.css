@@ -183,7 +183,7 @@ main {
     background-color: #1a1a2e; /* dashboard-matching deep blue */
     border-radius: 12px;
     border: 1px solid #0f0d1755;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 10px rgba(133, 130, 226, 0.3);
     padding: 15px 20px;
     height: 100px;
     overflow: hidden;
