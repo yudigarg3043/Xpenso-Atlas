@@ -435,13 +435,13 @@ body.light-theme .sidebar .nav-item a {
 }
 
 body.light-theme .sidebar .nav-item.active a {
-    background-color: #6369f5;
+    background-color: #8758FF;
     color: #ffffff;
 }
 
 body.light-theme .sidebar .nav-item a:hover {
-    background-color: #6369f5;
-    color: #ffffff;
+    background-color: #8758FF;
+    color: black;
 }
 
 body.light-theme .sidebar .logout-btn {
@@ -449,7 +449,7 @@ body.light-theme .sidebar .logout-btn {
 }
 
 body.light-theme .sidebar .logout-btn:hover {
-    background-color: #6369f5;
+    background-color: #8758FF;
     color: #ffffff;
 }
 
