@@ -102,135 +102,29 @@
                     <div class="card recent-transactions">
                         <div class="card-body">
                             <h3>Recent Transactions</h3>
-                            {{!-- <ul class="transaction-list">
-                                <li class="transaction-item">
-                                    <div class="transaction-icon expense">
-                                        <i class="fas fa-shopping-cart"></i>
-                                    </div>
-                                    <div class="transaction-details">
-                                        <span class="transaction-title">Grocery Shopping</span>
-                                        <span class="transaction-date">Today, 2:30 PM</span>
-                                    </div>
-                                    <span class="transaction-amount expense">-$85.20</span>
-                                </li>
-                                <li class="transaction-item">
-                                    <div class="transaction-icon income">
-                                        <i class="fas fa-money-check"></i>
-                                    </div>
-                                    <div class="transaction-details">
-                                        <span class="transaction-title">Salary Deposit</span>
-                                        <span class="transaction-date">Yesterday</span>
-                                    </div>
-                                    <span class="transaction-amount income">+$2,750.00</span>
-                                </li>
-                                <li class="transaction-item">
-                                    <div class="transaction-icon expense">
-                                        <i class="fas fa-utensils"></i>
-                                    </div>
-                                    <div class="transaction-details">
-                                        <span class="transaction-title">Restaurant</span>
-                                        <span class="transaction-date">Mar 20, 2025</span>
-                                    </div>
-                                    <span class="transaction-amount expense">-$42.50</span>
-                                </li>
-                                <li class="transaction-item">
-                                    <div class="transaction-icon expense">
-                                        <i class="fas fa-gas-pump"></i>
-                                    </div>
-                                    <div class="transaction-details">
-                                        <span class="transaction-title">Fuel</span>
-                                        <span class="transaction-date">Mar 18, 2025</span>
-                                    </div>
-                                    <span class="transaction-amount expense">-$65.75</span>
-                                </li>
-                            </ul> --}}
-                            <ul class="transaction-list"></ul>
+                            <ul class="transaction-list">
+                                {{!-- Adding Transactions Through Js Function --}}
+                            </ul>
                             <a href="#" class="btn btn-outline-primary btn-sm view-all">View All Transactions</a>
                         </div>
                     </div>
 
                     <div id="transactionModal" class="modal">
-  <div class="modal-content">
-    <span class="close" id="closeModal">&times;</span>
-                        <div class="card-body">
-                            <h3>All Transactions</h3>
-                            <ul class="transaction-list">
-                                <li class="transaction-item">
-                                    <div class="transaction-icon income">
-                                        <i class="fas fa-money-bill"></i>
-                                    </div>
-                                    <div class="transaction-details">
-                                        <span class="transaction-title">Mutual Funds</span>
-                                        <span class="transaction-date">Today, 2:30 PM</span>
-                                    </div>
-                                    <span class="transaction-amount income">+$85.20</span>
-                                </li>
-                                <li class="transaction-item">
-                                    <div class="transaction-icon income">
-                                        <i class="fas fa-money-check"></i>
-                                    </div>
-                                    <div class="transaction-details">
-                                        <span class="transaction-title">Salary Deposit</span>
-                                        <span class="transaction-date">Yesterday</span>
-                                    </div>
-                                    <span class="transaction-amount income">+$2,750.00</span>
-                                </li>
-                                <li class="transaction-item">
-                                    <div class="transaction-icon income">
-                                        <i class="fas fa-money-bill-trend-up"></i>
-                                    </div>
-                                    <div class="transaction-details">
-                                        <span class="transaction-title">Stock Investment</span>
-                                        <span class="transaction-date">Mar 20, 2025</span>
-                                    </div>
-                                    <span class="transaction-amount income">+$42.50</span>
-                                </li>
-                                <li class="transaction-item">
-                                    <div class="transaction-icon income">
-                                        <i class="fas fa-wallet"></i>
-                                    </div>
-                                    <div class="transaction-details">
-                                        <span class="transaction-title">Other Sources</span>
-                                        <span class="transaction-date">Mar 18, 2025</span>
-                                    </div>
-                                    <span class="transaction-amount income">+$65.75</span>
-                                </li>
-                            </ul>
+                        <div class="modal-content">
+                            <span class="close" id="closeModal">&times;</span>
+                            <div class="card-body">
+                                <h3>All Transactions</h3>
+                                <ul class="transaction-list">
+                                    {{!-- Adding All Spendings using Js Functions --}}
+                                </ul>
+                            </div>
                         </div>
-  </div>
-</div>
+                    </div>
 
                     <div class="card budget-card">
                         <div class="card-body">
                             <h3>Budget Status</h3>
                             <div id="status"></div>
-                             {{!-- <div class="budget-item"> --}}
-                                {{!--<div class="budget-info">
-                                    <span class="budget-category">Food & Groceries</span>
-                                    <span class="budget-progress">$420/$500</span>
-                                </div>
-                                <div class="progress">
-                                    <div class="progress-bar bg-success" role="progressbar" style="width: 84%"></div>
-                                </div>
-                            </div>
-                            <div class="budget-item">
-                                <div class="budget-info">
-                                    <span class="budget-category">Transportation</span>
-                                    <span class="budget-progress">$280/$300</span>
-                                </div>
-                                <div class="progress">
-                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 93%"></div>
-                                </div>
-                            </div>
-                            <div class="budget-item">
-                                <div class="budget-info">
-                                    <span class="budget-category">Entertainment</span>
-                                    <span class="budget-progress">$150/$200</span>
-                                </div>
-                                <div class="progress">
-                                    <div class="progress-bar bg-info" role="progressbar" style="width: 75%"></div>
-                                </div>
-                            </div> --}}
                         </div>
                     </div>
                 </div>
