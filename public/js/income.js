@@ -219,6 +219,29 @@ document.querySelector('.view-all').addEventListener('click', function () {
 
 });
 
+document.getElementById('downloadExcelBtn').addEventListener('click', async () => {
+    try {
+        const token = localStorage.getItem('token'); // if you use JWT auth
+
+        const res = await fetch('/api/incomes/export/excel', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        const blob = await res.blob();
+
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'Incomes.xlsx';
+        a.click();
+        window.URL.revokeObjectURL(url);
+    } catch (err) {
+        console.error('Failed to download Excel file:', err);
+    }
+});
+
 
 //Adding Income
 document.getElementById('incomeForm').addEventListener('submit', async function (e) {
