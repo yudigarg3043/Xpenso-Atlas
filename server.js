@@ -241,7 +241,9 @@ app.get('/', (req, res) => {
   app.get('/Faq',(req,res)=>{
   res.render('Faq');
   });
-
+  app.get("/privacy",(req, res) => {
+    res.render('privacy');
+  });
 
   app.get('/api/expenses', authenticateToken, async (req, res) => {
     try {
