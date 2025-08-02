@@ -15,7 +15,7 @@ const authenticateToken = require('./middleware/auth');
 const User = require('./models/User');
 
 // Import expense model from models/expense.js
-const Expense = require('./models/Expense');
+const Expense = require('./models/expense');
 
 // Import income model from models/income.js
 const Income = require('./models/Income');
