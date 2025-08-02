@@ -458,8 +458,9 @@ app.get('/api/transaction/summary', authenticateToken, async (req, res) => {
 // server.js or routes file
 app.get('/api/top-categories', async (req, res) => {
     try {
+        const userId = req.user.id;
       const topCategories = await Transaction.aggregate([
-        { $match: { type: "expense" } },
+        { $match: { userId: userId, type: "expense" } },
         { $group: { _id: "$category", total: { $sum: "$amount" } } },
         { $sort: { total: -1 } },
         { $limit: 3 }
