@@ -325,7 +325,9 @@ loadMonthlySummary();
 
     async function fetchTopCategories() {
         try {
-          const response = await fetch('/api/top-categories');
+            const response = await fetch('/api/top-categories', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
           const data = await response.json();
     
           const container = document.getElementById('top-categories');
