@@ -23,7 +23,7 @@ const Income = require('./models/Income');
 // Import contact model from models/contact.js
 const Contact = require('./models/contact');
 
-// Import transaction model from models/contact.js
+// Import transaction model from models/Transaction.js
 const Transaction = require('./models/Transaction');
 
 const app = express();
@@ -40,12 +40,9 @@ app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
-.then(() => console.log('MongoDB connected'))
-.catch(err => console.error('MongoDB connection error:', err));
+mongoose.connect(process.env.MONGODB_URI)
+    .then(() => console.log('MongoDB connected'))
+    .catch(err => console.error('MongoDB connection error:', err));
 
 // Register User
 app.post('/api/register', async (req, res) => {
@@ -221,31 +218,31 @@ app.post('/api/contact', async (req, res) => {
 
 app.get('/', (req, res) => {
     res.render('index');  // uses views/index.hbs
-  });
-  
-  app.get('/dashboard', (req, res) => {
+});
+
+app.get('/dashboard', (req, res) => {
     res.render('dashboard');  // uses views/dashboard.hbs
-  });
-  
-  app.get('/contact', (req, res) => {
+});
+
+app.get('/contact', (req, res) => {
     res.render('contact');  // uses views/contact.hbs
-  });
+});
 
-  app.get('/expense', (req, res) => {
+app.get('/expense', (req, res) => {
     res.render('expense');  // uses views/expense.hbs
-  });
+});
 
-  app.get('/income', (req,res) => {
+app.get('/income', (req, res) => {
     res.render('income');
-  })
-  app.get('/Faq',(req,res)=>{
-  res.render('Faq');
-  });
-  app.get("/privacy",(req, res) => {
+})
+app.get('/Faq', (req, res) => {
+    res.render('Faq');
+});
+app.get("/privacy", (req, res) => {
     res.render('privacy');
-  });
+});
 
-  app.get('/api/expenses', authenticateToken, async (req, res) => {
+app.get('/api/expenses', authenticateToken, async (req, res) => {
     try {
         const userId = req.user.id;
 
@@ -322,9 +319,9 @@ app.get('/api/expenses/total-per-category', authenticateToken, async (req, res) 
             'Food': 500,
             'Transport': 300,
             'Entertainment': 600,
-            'Bills':400,
+            'Bills': 400,
             'Shopping': 200,
-            'Other':100
+            'Other': 100
         };
 
         const categoryTotals = {};
@@ -345,7 +342,6 @@ app.get('/api/expenses/total-per-category', authenticateToken, async (req, res) 
         // Format result
         const budgetStatus = Object.keys(categoryLimits).map(category => {
             const spent = categoryTotals[category] || 0;
-            const limit = categoryLimits[category]; // optional now
             const percentage = grandTotal > 0 ? ((spent / grandTotal) * 100).toFixed(2) : 0;
 
             return {
@@ -375,8 +371,8 @@ app.get('/api/incomes/total-per-category', authenticateToken, async (req, res) =
             'Salary': 500,
             'Stock Investment': 300,
             'Mutual Funds': 600,
-            'Dividend':400,
-            'Other Sources':100
+            'Dividend': 400,
+            'Other Sources': 100
         };
 
         const categoryTotals = {};
@@ -397,7 +393,6 @@ app.get('/api/incomes/total-per-category', authenticateToken, async (req, res) =
         // Format result
         const budgetStatus = Object.keys(categoryLimits).map(category => {
             const spent = categoryTotals[category] || 0;
-            const limit = categoryLimits[category]; // optional now
             const percentage = grandTotal > 0 ? ((spent / grandTotal) * 100).toFixed(2) : 0;
 
             return {
@@ -456,28 +451,28 @@ app.get('/api/transaction/summary', authenticateToken, async (req, res) => {
 });
 
 // server.js or routes file
-app.get('/api/top-categories', async (req, res) => {
+app.get('/api/top-categories', authenticateToken, async (req, res) => {
     try {
-        const userId = req.user.id;
-      const topCategories = await Transaction.aggregate([
-        { $match: { userId: userId, type: "expense" } },
-        { $group: { _id: "$category", total: { $sum: "$amount" } } },
-        { $sort: { total: -1 } },
-        { $limit: 3 }
-      ]);
-  
-      res.json(topCategories);
+        const userId = new mongoose.Types.ObjectId(req.user.id);
+        const topCategories = await Transaction.aggregate([
+            { $match: { type: "expense", userId: userId } },
+            { $group: { _id: "$category", total: { $sum: "$amount" } } },
+            { $sort: { total: -1 } },
+            { $limit: 3 }
+        ]);
+
+        res.json(topCategories);
     } catch (err) {
-      console.error(err);
-      res.status(500).json({ error: "Server error" });
+        console.error(err);
+        res.status(500).json({ error: "Server error" });
     }
-  });
+});
 
 
 //   Fetching Excel Sheet for expenses
-app.get('/api/expenses/export/excel', async (req, res) => {
+app.get('/api/expenses/export/excel', authenticateToken, async (req, res) => {
     try {
-        const expenses = await Expense.find();
+        const expenses = await Expense.find({ userId: req.user.id });
 
         // Convert to a JSON array suitable for Excel
         const data = expenses.map(exp => ({
@@ -527,9 +522,9 @@ app.get('/api/expenses/export/excel', async (req, res) => {
 });
 
 //   Fetching Excel Sheet for earnings
-app.get('/api/incomes/export/excel', async (req, res) => {
+app.get('/api/incomes/export/excel', authenticateToken, async (req, res) => {
     try {
-        const earnings = await Income.find();
+        const earnings = await Income.find({ userId: req.user.id });
 
         // Convert to a JSON array suitable for Excel
         const data = earnings.map(inc => ({
@@ -549,7 +544,7 @@ app.get('/api/incomes/export/excel', async (req, res) => {
         });
 
         // Add header row manually: this will be row 1
-        const headers = [["Earnings"], ["Date","Description", "Category", "Amount"]];
+        const headers = [["Earnings"], ["Date", "Description", "Category", "Amount"]];
         const worksheet = XLSX.utils.aoa_to_sheet(headers);
 
         // Append data rows starting from row 3
@@ -569,7 +564,7 @@ app.get('/api/incomes/export/excel', async (req, res) => {
 
         const buffer = XLSX.write(workbook, { type: 'buffer', bookType: 'xlsx' });
 
-        res.setHeader('Content-Disposition', 'attachment; filename="expenses.xlsx"');
+        res.setHeader('Content-Disposition', 'attachment; filename="earnings.xlsx"');
         res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         res.send(buffer);
     } catch (err) {
@@ -579,9 +574,9 @@ app.get('/api/incomes/export/excel', async (req, res) => {
 });
 
 
-app.get('/api/transaction/export/excel', async (req, res) => {
+app.get('/api/transaction/export/excel', authenticateToken, async (req, res) => {
     try {
-        const transaction = await Transaction.find();
+        const transaction = await Transaction.find({ userId: req.user.id });
 
         // Convert to a JSON array suitable for Excel
         const data = transaction.map(inc => ({
@@ -622,7 +617,7 @@ app.get('/api/transaction/export/excel', async (req, res) => {
 
         const buffer = XLSX.write(workbook, { type: 'buffer', bookType: 'xlsx' });
 
-        res.setHeader('Content-Disposition', 'attachment; filename="expenses.xlsx"');
+        res.setHeader('Content-Disposition', 'attachment; filename="transactions.xlsx"');
         res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         res.send(buffer);
     } catch (err) {
