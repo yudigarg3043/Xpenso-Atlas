@@ -1,7 +1,7 @@
 // Toggle password visibility
-function togglePassword(inputId, event) {
+function togglePassword(inputId, element) {
     const passwordInput = document.getElementById(inputId);
-    const icon = event.currentTarget.querySelector('i');
+    const icon = element.querySelector('i');
 
     if (passwordInput.type === 'password') {
         passwordInput.type = 'text';

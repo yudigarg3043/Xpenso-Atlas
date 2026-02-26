@@ -21,7 +21,7 @@
 
                         <div class="mb-3 password-field">
                             <input type="password" class="form-control" id="password" placeholder="Password" required>
-                            <span class="password-toggle" onclick="togglePassword('password', event)">
+                            <span class="password-toggle" onclick="togglePassword('password', this)">
                                 <i class="far fa-eye"></i>
                             </span>
                             <div class="invalid-feedback">Password is required.</div>
@@ -58,16 +58,19 @@
                         </div>
 
                         <div class="mb-3 password-field">
-                            <input type="password" class="form-control" id="signupPassword" placeholder="Password" required>
-                            <span class="password-toggle" onclick="togglePassword('signupPassword')">
+                            <input type="password" class="form-control" id="signupPassword" placeholder="Password"
+                                required>
+                            <span class="password-toggle" onclick="togglePassword('signupPassword', this)">
                                 <i class="far fa-eye"></i>
                             </span>
-                            <div class="invalid-feedback">Password must be at least 8 characters with letters and numbers.</div>
+                            <div class="invalid-feedback">Password must be at least 8 characters with letters and
+                                numbers.</div>
                         </div>
 
                         <div class="mb-3 password-field">
-                            <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password" required>
-                            <span class="password-toggle" onclick="togglePassword('confirmPassword')">
+                            <input type="password" class="form-control" id="confirmPassword"
+                                placeholder="Confirm Password" required>
+                            <span class="password-toggle" onclick="togglePassword('confirmPassword', this)">
                                 <i class="far fa-eye"></i>
                             </span>
                             <div class="invalid-feedback">Passwords do not match.</div>
@@ -96,7 +99,8 @@
             <div class="blob blob1"></div>
             <div class="blob blob2"></div>
             <div class="blob blob3"></div>
-            <spline-viewer url="https://prod.spline.design/JaqqhVOklzk6NfaJ/scene.splinecode" class="robot-3d"></spline-viewer>
+            <spline-viewer url="https://prod.spline.design/JaqqhVOklzk6NfaJ/scene.splinecode"
+                class="robot-3d"></spline-viewer>
         </div>
     </div>
 </div>
