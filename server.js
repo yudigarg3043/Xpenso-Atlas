@@ -627,6 +627,12 @@ app.get('/api/transaction/export/excel', authenticateToken, async (req, res) => 
 });
 
 // Start server
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+// Start server
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+    });
+}
+
+// Export for Vercel serverless functions
+module.exports = app;
